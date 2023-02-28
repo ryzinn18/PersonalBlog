@@ -87,14 +87,16 @@ def delete_comment(comment_id):
     comment = Comment.query.filter_by(id=comment_id).first()
 
     if not comment:
-        flash("Comment does not exist.", category="error")
+        # flash("Comment does not exist.", category="error")
+        return jsonify({"error": "Comment does not exist."}, 400)
     elif current_user.id != comment.author and current_user.id != comment.post.author:
         flash("You do not have permission to delete this comment.", category="error")
     else:
         db.session.delete(comment)
         db.session.commit()
 
-    return redirect(url_for("views.home"))
+    # return redirect(url_for("views.home"))
+    return jsonify({"success": "Comment deleted."})
 
 
 @views.route("/like-post/<post_id>", methods=["POST"])

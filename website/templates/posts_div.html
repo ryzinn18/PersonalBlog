@@ -31,7 +31,7 @@
             <div class="card">
               <div class="card-body" id="comments-expanded-{{post.id}}">
                 {% for comment in post.comments %}
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center" id="comment-{{comment.id}}">
                   <div>
                     <a href="/posts/{{comment.user.username}}">{{comment.user.username}}</a>: {{comment.text}}
                   </div>
@@ -40,7 +40,7 @@
                     <!-- Allow author or commentor to delete comments -->
                     {% if user.id == comment.author or user.id == post.author %}
                     <div class="btn-group">
-                        <a class="fas fa-trash" id="trash-button-{{post.id}}" href="/delete-comment/{{comment.id}}"></a>
+                        <a class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick="delete_comment({{comment.id}})"></a>
                     </div>
                     {% endif %}
                   </div>
