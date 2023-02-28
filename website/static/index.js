@@ -30,6 +30,23 @@ function delete_comment(commentId) {
   }
 
 
+function delete_post(postId) {
+    const post = document.getElementById(`post-${postId}`)
+    const postCard = document.getElementById(`post-card-${postId}`)
+  
+    fetch(`/delete-post/${postId}`, {}) 
+    .then((res) => res.json())
+    .then((data) => {
+        
+        if (data["status"] == 200) {
+            console.log(data)
+            postCard.remove();
+        }
+    })
+    .catch((e) => alert("Could not delete post."));
+  }
+
+
 function post_comment(postId) {
     const post = document.getElementById(`post-${postId}`)
   

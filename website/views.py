@@ -39,15 +39,15 @@ def delete_post(id):
     post = Post.query.filter_by(id=id).first()
 
     if not post:
-        flash("Post does not exist!", category="error")
+        return jsonify({"error": "Post does not exist.", "status": 400})
     elif current_user.id == post.id:
-        flash("You do not have permission to delte this post!", category="error")
+        return jsonify({"error": "You do not have permission to delte this post.", "status": 400})
     else:
         db.session.delete(post)
         db.session.commit()
         flash("Post deleted!", category="success")
 
-    return redirect(url_for("views.home"))
+    return jsonify({"success": "Post deleted successfully.", "status": 200})
 
 
 @views.route("/posts/<username>")
@@ -89,7 +89,7 @@ def delete_comment(comment_id):
     if not comment:
         return jsonify({"error": "Comment does not exist."}, 400)
     elif current_user.id != comment.author and current_user.id != comment.post.author:
-        flash("You do not have permission to delete this comment.", category="error")
+        return jsonify({"error": "You do not have permission to delete this comment."}, 400)
     else:
         db.session.delete(comment)
         db.session.commit()
