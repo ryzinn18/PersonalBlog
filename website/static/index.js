@@ -5,11 +5,16 @@ function like(postId) {
     fetch(`/like-post/${postId}`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
-        likeCount.innerHTML = data["likes"];
-        if (data["liked"] === true) {
-          likeButton.className = "fas fa-thumbs-up";
-        } else {
-          likeButton.className = "far fa-thumbs-up";
+        if (data["status"] === 200) {
+            likeCount.innerHTML = data["likes"];
+            if (data["liked"] === true) {
+                likeButton.className = "fas fa-thumbs-up";
+            } else {
+                likeButton.className = "far fa-thumbs-up";
+            }
+        }
+        if (data["status"] === 401) {
+            window.location.replace("/login");
         }
       })
       .catch((e) => alert("Could not like post."));

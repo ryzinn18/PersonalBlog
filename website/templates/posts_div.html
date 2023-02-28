@@ -64,9 +64,9 @@
             {% endif %}
           </p>
           <!-- Form for creating a comment -->
-          <form class="input-group mb-3" method="POST">
+          <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
             <input type="text" id="text" name="text" class="form-control" placeholder="Leave a comment..."/>
-            <button type="submit" class="btn btn-primary" onclick="post_comment({{post.id}})">Comment</button>
+            <button type="submit" class="btn btn-primary">Comment</button>
           </form>
         <!--Display post's date -->
         </div>
