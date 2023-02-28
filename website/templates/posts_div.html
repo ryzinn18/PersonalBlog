@@ -36,16 +36,11 @@
                   </div>
                   <div>
                     <small class="text-muted"> {{comment.date_created}}</small>
+                    <!-- Allow author or commentor to delete comments -->
                     {% if user.id == comment.author or user.id == post.author %}
                     <div class="btn-group">
                         <a class="fas fa-trash" id="trash-button-{{post.id}}" href="/delete-comment/{{comment.id}}"></a>
                     </div>
-                    <!-- <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
-                      <ul class="dropdown-menu">
-                        <li><a href="/delete-comment/{{comment.id}}" class="dropdown-item">Delete</a></li>
-                      </ul>
-                    </div> -->
                     {% endif %}
                   </div>
                 </div>
@@ -54,26 +49,20 @@
             </div>
           </div>
           <p class="card-text">
-            {% if post.comments|length > 0 %}
+            {% if post.comments|length == 1 %}
+                <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                    <button class="btn btn-secondayr">View 1 Comment</button>
+                </a>
+            {% elif post.comments|length > 1 %}
             <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-              <button class="btn btn-secondayr">View {{post.comments|length}} Comments</button>
+                <button class="btn btn-secondayr">View {{post.comments|length}} Comments</button>
             </a>
             {% else %}
-            <small class="text-muted">No Comments</small>
+                <small class="text-muted">No Comments</small>
             {% endif %}
           </p>
-          <form
-            class="input-group mb-3"
-            method="POST"
-            action="/create-comment/{{post.id}}"
-          >
-            <input
-              type="text"
-              id="text"
-              name="text"
-              class="form-control"
-              placeholder="Comment something!"
-            />
+          <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
+            <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!"/>
             <button type="submit" class="btn btn-primary">Comment</button>
           </form>
         </div>
