@@ -36,7 +36,7 @@
                     <a href="/posts/{{comment.user.username}}">{{comment.user.username}}</a>: {{comment.text}}
                   </div>
                   <div>
-                    <small class="text-muted"> {{comment.date_created}}</small>
+                    <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y")}}</small>
                     <!-- Allow author or commentor to delete comments -->
                     {% if user.id == comment.author or user.id == post.author %}
                     <div class="btn-group">
@@ -70,7 +70,7 @@
           </form>
         <!--Display post's date -->
         </div>
-        <div class="card-footer text-muted">{{post.date_created}}</div>
+        <div class="card-footer text-muted">Posted on {{post.date_created.strftime("%b %d, %Y")}}</div>
       </div>
       <br> {% endfor %}
     </div>
