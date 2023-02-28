@@ -23,9 +23,10 @@
             {% endif %}
           </div>
         </div>
+        <!-- Comment section -->
         <div class="card-body">
           <div class="card-text">{{post.text}}</div>
-          <br />
+          <br>
           <div class="collapse" id="comments-{{post.id}}">
             <div class="card">
               <div class="card-body" id="comments-expanded-{{post.id}}">
@@ -48,27 +49,30 @@
               </div>
             </div>
           </div>
+          <!-- Button for expanding comment section -->
           <p class="card-text">
             {% if post.comments|length == 1 %}
                 <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-                    <button class="btn btn-secondayr">View 1 Comment</button>
+                    <button class="btn btn-secondary">View 1 Comment</button>
                 </a>
             {% elif post.comments|length > 1 %}
-            <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-                <button class="btn btn-secondayr">View {{post.comments|length}} Comments</button>
-            </a>
+                <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                    <button class="btn btn-secondary">View {{post.comments|length}} Comments</button>
+                </a>
             {% else %}
                 <small class="text-muted">No Comments</small>
             {% endif %}
           </p>
+          <!-- Form for creating a comment -->
           <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
             <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!"/>
             <button type="submit" class="btn btn-primary">Comment</button>
           </form>
+        <!--Display post's date -->
         </div>
         <div class="card-footer text-muted">{{post.date_created}}</div>
       </div>
-      <br/ > {% endfor %}
+      <br> {% endfor %}
     </div>
     {% block footer %}
     <div align="center">
