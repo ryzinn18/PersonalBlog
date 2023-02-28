@@ -19,7 +19,7 @@ function like(postId) {
 function delete_comment(commentId) {
     const comment = document.getElementById(`comment-${commentId}`)
   
-    fetch(`/delete-comment/${commentId}`, {}) // , { method: "POST" } removed this as delete_comment takes no methods
+    fetch(`/delete-comment/${commentId}`, {}) 
     .then((res) => res.json())
     .then((data) => {
         if (data["success"]) {
@@ -27,4 +27,26 @@ function delete_comment(commentId) {
         }
     })
     .catch((e) => alert("Could not delete comment."));
+  }
+
+
+function post_comment(postId) {
+    const post = document.getElementById(`post-${postId}`)
+  
+    fetch(`/create-comment/${postId}`, { method: "POST" })
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data)
+        if (data["text"]) {
+            const commentId = data["comment_id"];
+            const commentDiv = document.createElement('div');
+            commentDiv.setAttribute("id", commentId);
+            commentDiv.className("d-flex justify-content-between align-items-center");
+            const newContent = document.createTextNode("Hi there and greetings!");
+            commentDiv.appendChild(newContent);
+            const currentDiv = document.getElementById((commentId - 1));
+            document.body.insertBefore(newDiv, currentDiv);
+        }
+    })
+    .catch((e) => alert("Could not post comment."));
   }

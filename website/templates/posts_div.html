@@ -40,7 +40,7 @@
                     <!-- Allow author or commentor to delete comments -->
                     {% if user.id == comment.author or user.id == post.author %}
                     <div class="btn-group">
-                        <a class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick="delete_comment({{comment.id}})"></a>
+                        <i class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick="delete_comment({{comment.id}})"></i>
                     </div>
                     {% endif %}
                   </div>
@@ -64,9 +64,9 @@
             {% endif %}
           </p>
           <!-- Form for creating a comment -->
-          <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
-            <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!"/>
-            <button type="submit" class="btn btn-primary">Comment</button>
+          <form class="input-group mb-3" method="POST">
+            <input type="text" id="text" name="text" class="form-control" placeholder="Leave a comment..."/>
+            <button type="submit" class="btn btn-primary" onclick="post_comment({{post.id}})">Comment</button>
           </form>
         <!--Display post's date -->
         </div>
