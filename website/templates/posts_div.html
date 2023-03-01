@@ -24,10 +24,12 @@
             {% endif %}
           </div>
         </div>
-        <!-- Comment section -->
+        <!-- Post Card -->
         <div class="card-body">
-          <div class="card-text"><b>{{post.text}}</b></div>
+          <div class="card-text"><b>Title: {{post.title}}</b></div>
+          <div class="card-text"><b>Brief: </b>{{post.description}}</div>
           <br>
+          <!-- Comment section -->
           <div class="collapse" id="comments-{{post.id}}">
             <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;">
               <div class="card-body" id="comments-expanded-{{post.id}}">

@@ -119,3 +119,13 @@ body.posts {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
+
+body.create-post {
+  padding-top: 10rem;  
+  background-image: url("/static/singapore.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-bottom: calc(10rem - 4.5rem);
+}

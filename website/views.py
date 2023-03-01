@@ -18,16 +18,19 @@ def home():
 @login_required
 def create_post():
     if request.method == "POST":
+        title = request.form.get("title")
+        description = request.form.get("description") if request.form.get("description") else None
         text = request.form.get("text")
+        image = request.form.get("image") if request.form.get("image") else None
 
-        if not text:
+        if not text or not title:
             flash("Post cannot be empty!", category="error")
+            return render_template("create_post.html", user=current_user)
         else:
-            post = Post(text=text, author=current_user.id)
+            post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
             db.session.add(post)
             db.session.commit()
-            flash("Post created!", category="success")
-            return redirect(url_for("views.home"))
+            return redirect(url_for("views.all_posts"))
 
     return render_template("create_post.html", user=current_user)
 
@@ -44,7 +47,6 @@ def delete_post(id):
     else:
         db.session.delete(post)
         db.session.commit()
-        flash("Post deleted!", category="success")
 
     return jsonify({"success": "Post deleted successfully.", "status": 200})
 
