@@ -49,6 +49,13 @@ def delete_post(id):
     return jsonify({"success": "Post deleted successfully.", "status": 200})
 
 
+@views.route("/posts")
+def all_posts():
+    posts = Post.query.filter_by()
+
+    return render_template("posts.html", user=current_user, posts=posts)
+
+
 @views.route("/posts/<username>")
 @login_required
 def posts(username):
@@ -58,7 +65,7 @@ def posts(username):
         return redirect(url_for("views.home"))
 
     posts = user.posts
-    return render_template("posts.html", user=current_user, posts=posts, username=username)
+    return render_template("users_posts.html", user=current_user, posts=posts, username=username)
 
 
 @views.route("/create-comment/<post_id>", methods=["POST"])
@@ -79,7 +86,7 @@ def create_comment(post_id):
             flash("Post does not exist!", category="error")
             # return jsonify({"error": "Post does not exist!", "status": 400})
 
-    return redirect(url_for("views.home"))
+    return redirect(url_for("views.all_posts"))
     # return jsonify({"text": text, "comment_id": comment.id, "status": 200})
 
 

@@ -1,12 +1,12 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
-    <h1 align="center">{% block header %}Posts{% endblock %}</h1>
+{% extends "base.html" %} 
+{% block title %}Posts Div{% endblock %} 
+{% block content%}
     <div id="posts">
       {% for post in posts %}
-      <div class=" container-sm">
-      <div class="card border-dark" id="post-card-{{post.id}}">
+      <div class="container-sm">
+      <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;" id="post-card-{{post.id}}">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
+          <label><b>Author: </b><a href="/posts/{{post.user.username}}">{{post.user.username}}</a></label>
           <div>
             <!-- Display like count -->
             <span id="likes-count-{{post.id}}">{{ post.likes|length }}</span> 
@@ -26,10 +26,10 @@
         </div>
         <!-- Comment section -->
         <div class="card-body">
-          <div class="card-text">{{post.text}}</div>
+          <div class="card-text"><b>{{post.text}}</b></div>
           <br>
           <div class="collapse" id="comments-{{post.id}}">
-            <div class="card">
+            <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;">
               <div class="card-body" id="comments-expanded-{{post.id}}">
                 {% for comment in post.comments %}
                 <div class="d-flex justify-content-between align-items-center" id="comment-{{comment.id}}">

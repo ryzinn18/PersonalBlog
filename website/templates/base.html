@@ -9,35 +9,30 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
         crossorigin="anonymous"
     />
-    <link href="css/styles.css" rel="stylesheet" />
     <title>{% block title %}{% endblock %}</title>
     <script src="https://kit.fontawesome.com/b669b9afd1.js" crossorigin="anonymous"></script>
+    <link href="/static/styles.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <button 
-                class="navbar-toggler" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#navbar"
-            >
-                <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/home">Home</a>
-                {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="/posts/{{user.username}}">My Posts</a>    
-                    <a class="nav-item nav-link" href="/logout">Logout({{user.username}})</a>  
-                    <i class="fa-.whiteiconcolor {color:white;} fa-user whiteiconcolor"></i>
-                {% else %}
-                    <a class="nav-item nav-link" href="/login">Login</a>
-                    <a class="nav-item nav-link" href="/sign-up">Sign Up</a>
-                {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Ryan Zinniger</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <a class="nav-item nav-link" href="/home">Home</a>
+                    <a class="nav-item nav-link" href="/posts">All Posts</a>
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="/posts/{{user.username}}">My Posts</a>    
+                        <a class="nav-item nav-link" href="/logout">Logout({{user.username}})</a>  
+                        <i class="fa-solid fa-user" style="padding: .6rem"></i>
+                    {% else %}
+                        <a class="nav-item nav-link" href="/login">Login</a>
+                        <a class="nav-item nav-link" href="/sign-up">Sign Up</a>
+                    {% endif %}
+                </ul>
             </div>
-        </div>
         </div>
     </nav>
     <!-- Display flash messages -->
@@ -71,5 +66,6 @@
       type="text/javascript"
       src="{{ url_for('static', filename='index.js')}}"
     ></script>
+    <script src="/static/scripts.js"></script>
 </body>
 </html>
