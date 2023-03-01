@@ -1,0 +1,121 @@
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: url("/static/profile.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+header.masthead h1, header.masthead .h1 {
+    font-size: 2.25rem;
+}
+@media (min-width: 992px) {
+header.masthead {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 4.5rem;
+    padding-bottom: 0;
+}
+header.masthead p {
+    font-size: 1.15rem;
+}
+header.masthead h1, header.masthead .h1 {
+    font-size: 3rem;
+}
+}
+@media (min-width: 1200px) {
+header.masthead h1, header.masthead .h1 {
+    font-size: 3.5rem;
+}
+}
+
+hr.divider {
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #021b6e;
+    opacity: 1;
+  }
+
+.page-section {
+    padding: 8rem 0;
+}
+
+  #mainNav {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    transition: background-color 0.2s ease;
+  }
+  #mainNav .navbar-brand {
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: #212529;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link {
+    color: #04c1c4;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
+    color: #04c1c4 ;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link.active {
+    color: #04c1c4 !important;
+  }
+  @media (min-width: 992px) {
+    #mainNav {
+      box-shadow: none;
+      background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #mainNav .navbar-brand:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0 1rem;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link:hover {
+      color: #fff;
+    }
+    #mainNav .navbar-nav .nav-item:last-child .nav-link {
+      padding-right: 0;
+    }
+    #mainNav.navbar-shrink {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+    #mainNav.navbar-shrink .navbar-brand {
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-brand:hover {
+      color: #f4623a;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
+      color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link:hover {
+      color: #04c1c4;
+    }
+  }
+
+
+body.posts {
+  padding-top: 10rem;  
+  background-image: url("/static/swamis.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-bottom: calc(10rem - 4.5rem);
+}
+
+.bg-light-opacity {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
