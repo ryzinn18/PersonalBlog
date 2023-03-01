@@ -136,3 +136,31 @@ def like(post_id):
     return jsonify(
         {"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes), "status": 200}
     )
+
+
+@views.route("/pin-post/<post_id>", methods=["POST"])
+def pin(post_id):
+    # Initially check that user is logged in. Return error if not.
+    # if not current_user.is_authenticated:
+    #     flash("You must log in to like posts!", category="error")
+    #     return jsonify({"error": "You must log in to like posts!", "status": 401})
+
+    # Retreive the post and like objects given the post id and current user's id
+    post = Post.query.filter_by(id=post_id).first()
+    pinned = post.pinned
+
+    # Check that the posts exists. Return error if not.
+    if not post:
+        return jsonify({"error": "Post does not exist.", "status": 400})
+
+    # Update the pin status.
+    if pinned:
+        pinned = False
+        post.pinned = pinned
+    else:
+        pinned = True
+        post.pinned = pinned
+    db.session.commit()
+
+    # Return the amount of likes and bool of whether user has like the post or not.
+    return jsonify({"pinned": pinned, "status": 200})

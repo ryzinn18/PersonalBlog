@@ -52,6 +52,31 @@ function delete_post(postId) {
   }
 
 
+function pin(postId) {
+    // const pinned = document.getElementById(`likes-count-${postId}`).getAttribute("value");
+    const pinButton = document.getElementById(`pin-button-${postId}`);
+  
+    fetch(`/pin-post/${postId}`, { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data["status"] === 200) {
+            // pinned.innerHTML = data["pinned"];
+            if (data["pinned"] === true) {
+                pinButton.className = "param fa-solid fa-check";
+            } else {
+                pinButton.className = "param fa-regular fa-location-pin";
+            }
+        }
+        // if (data["status"] === 401) {
+        //     window.location.replace("/login");
+        // }
+      })
+      .catch((e) => alert("Could not pin post."));
+  }
+
+
+
+//   Not currently opperational
 function post_comment(postId) {
     const post = document.getElementById(`post-${postId}`)
   

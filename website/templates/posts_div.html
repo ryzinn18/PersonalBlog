@@ -16,17 +16,23 @@
             {% else %}
                 <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})">  </i>
             {% endif %} 
+            <!-- Display correct pin icon based on whether user has pinned their pos -->
+            {% if user.id == post.author %}
+              {% if post.pinned == False %}
+                  <i class="param fa-solid fa-location-pin" value="false" id="pin-button-{{post.id}}" onclick="pin({{post.id}})"></i>
+              {% else %}
+                  <i class="param fa-solid fa-check" value="true" id="pin-button-{{post.id}}" onclick="pin({{post.id}})"></i>
+              {% endif %}
+            {% endif %}
             <!-- Allow user to delete their own posts -->
             {% if user.id == post.author %}
-                <div class="btn-group">
                     <i class="fas fa-trash" id="delete-post-button-{{post.id}}" onclick="delete_post({{post.id}})"></i>
-                </div>
             {% endif %}
           </div>
         </div>
         <!-- Post Card -->
         <div class="card-body">
-          <div class="card-text"><b>Title: {{post.title}}</b></div>
+          <div class="card-text"><h2>{{post.title}}</h2></div>
           <div class="card-text"><b>Brief: </b>{{post.description}}</div>
           <br>
           <!-- Comment section -->

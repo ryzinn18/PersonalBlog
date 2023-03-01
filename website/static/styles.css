@@ -129,3 +129,19 @@ body.create-post {
   background-size: cover;
   padding-bottom: calc(10rem - 4.5rem);
 }
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label:before {
+  display: inline-block;
+  font-family: FontAwesome;
+  content: "\f276";
+  color: rgb(79, 79, 79);
+}
+
+input[type="checkbox"]:checked + label:before {
+  content: "\f276";
+  color:rgb(206, 39, 39);
+}
