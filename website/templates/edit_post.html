@@ -1,28 +1,30 @@
 {% extends "base.html" %}
-{% block title %}Create Post{% endblock %}
+{% block title %}Update Post{% endblock %}
 {% block content %}
 <body class="create-post">
     <div class="container px-4 px-lg-5 h-100">
         <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
             <div class="col-lg-8 card border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
-                <form class="form-group container-sm" method="POST" action="/create-post">
-                    <h1 class="text-black font-weight-bold text-center"><b>Create a Post</b></h1>
+                <form class="form-group container-sm" method="POST" action="/update-post/{{post.id}}" id="update-post-{{post.id}}">
+                    <h1 class="text-black font-weight-bold text-center"><b>Update Post</b></h1>
                     <hr class="divider" />
-
+                    <!-- Add buttons section  -->
                     <label for="title"><b>Post Title</b></label>
-                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title"/><br>
+                    <input type="text" id="title" name="title" class="form-control" value="{{ post.title }}"/><br>
                     
                     <label for="description"><b>Description</b></label>
-                    <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea>
+                    <textarea name="description" id="description" class="form-control">{{ post.description }}</textarea>
                     
                     <label for="text"><b>Post Body</b></label>
-                    <textarea name="text" id="text" class="form-control" placeholder="Write Post Here"></textarea>
+                    <textarea name="text" id="text" class="form-control">{{ post.text }}</textarea>
                     
                     <label for="image"><b>Image Name</b> (including extension)</label>
-                    <input type="text" id="image" name="image" class="form-control" rows="10" placeholder="Optional Image Name"/><br>
+                    <input type="text" id="image" name="image" class="form-control" rows="10" value="{{ post.image }}"/><br>
+                    <div class="text-muted">Posted on {{post.date_created.strftime("%B %d, %Y")}}</div>
+                    <div class="text-muted">Last updated on {{post.date_updated.strftime("%B %d, %Y")}}</div>
                     <br>
                     <div align="center">
-                        <button type="submit" class="btn btn-lg btn-primary">Post</button>
+                        <button type="submit" class="btn btn-lg btn-primary">Update Post</button>
                     </div>
                     <br>
             </form>

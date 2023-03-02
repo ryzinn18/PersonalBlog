@@ -7,16 +7,17 @@
     {% else %}
         <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})">  </i>
     {% endif %} 
-    <!-- Display correct pin icon based on whether user has pinned their pos -->
+    <!-- Buttons for Post's Author Only -->
     {% if user.id == post.author %}
+      <!-- Display correct pin icon based on whether user has pinned their pos -->
       {% if post.pinned == False %}
           <i class="param fa-solid fa-location-pin" value="false" id="pin-button-{{post.id}}" onclick="pin({{post.id}})"></i>
       {% else %}
           <i class="param fa-solid fa-check" value="true" id="pin-button-{{post.id}}" onclick="pin({{post.id}})"></i>
       {% endif %}
-    {% endif %}
-    <!-- Allow user to delete their own posts -->
-    {% if user.id == post.author %}
-            <i class="fas fa-trash" id="delete-post-button-{{post.id}}" onclick="delete_post({{post.id}})"></i>
+    <!-- Button to update post -->
+        <a class="fa-solid fa-pen" id="edit-post-{{post.id}}" href="/edit-post/{{ post.id }}" style="text-decoration: none; color: #000000;"></a>
+    <!-- Button to delete  post -->
+        <i class="fas fa-trash" id="delete-post-button-{{post.id}}" onclick="delete_post({{post.id}})"></i>
     {% endif %}
 </div>

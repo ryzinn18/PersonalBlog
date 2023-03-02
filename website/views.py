@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from . import db
+from datetime import datetime
 
 views = Blueprint("views", __name__)
 
@@ -30,9 +31,57 @@ def create_post():
             post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
             db.session.add(post)
             db.session.commit()
-            return redirect(url_for("views.all_posts"))
+            return render_template("post.html", user=current_user, post=post)
 
     return render_template("create_post.html", user=current_user)
+
+
+@views.route("/edit-post/<post_id>")
+@login_required
+def edit_post(post_id):
+    """View for update post page."""
+    post = Post.query.filter_by(id=post_id).first()
+
+    if not post:
+        flash("This post does not exist!", category="error")
+        return render_template("home.html", user=current_user)
+
+    return render_template("edit_post.html", user=current_user, post=post)
+
+
+@views.route("/update-post/<post_id>", methods=["GET", "POST"])
+@login_required
+def update_post(post_id):
+    """Update the post passed with the new info submitted"""
+
+    post = Post.query.filter_by(id=post_id).first()
+
+    if not post:
+        flash("This post does not exist!", category="error")
+        return render_template("home.html", user=current_user)
+
+    # Declare updated info
+    title = request.form.get("title")
+    description = request.form.get("description")
+    text = request.form.get("text")
+    image = request.form.get("image")
+
+    if not (title or text or image):
+        flash("All fields are required except description!", category="error")
+        return render_template("home.html", user=current_user)
+
+    # Update the post object
+    if request.method == "POST":
+        post.title = title
+        post.description = description
+        post.text = text
+        post.image = image
+        post.date_updated = datetime.now()
+        db.session.commit()
+
+        return redirect(url_for("views.post", post_id=post.id))
+
+    return render_template(url_for("home.html"), user=current_user)
 
 
 @views.route("/delete-post/<id>")
@@ -53,6 +102,7 @@ def delete_post(id):
 
 @views.route("/posts")
 def all_posts():
+    """View for all posts."""
     posts = Post.query.filter_by()
 
     return render_template("posts.html", user=current_user, posts=posts)
@@ -61,6 +111,7 @@ def all_posts():
 @views.route("/posts/<username>")
 @login_required
 def posts(username):
+    """View for all posts for a given user."""
     user = User.query.filter_by(username=username).first()
     if not user:
         flash("No user with that username exists!", category="error")
@@ -72,6 +123,7 @@ def posts(username):
 
 @views.route("/post/<post_id>")
 def post(post_id):
+    """View for a single post"""
     post = Post.query.filter_by(id=post_id).first()
 
     return render_template("post.html", user=current_user, post=post)
@@ -147,11 +199,6 @@ def like(post_id):
 
 @views.route("/pin-post/<post_id>", methods=["POST"])
 def pin(post_id):
-    # Initially check that user is logged in. Return error if not.
-    # if not current_user.is_authenticated:
-    #     flash("You must log in to like posts!", category="error")
-    #     return jsonify({"error": "You must log in to like posts!", "status": 401})
-
     # Retreive the post and like objects given the post id and current user's id
     post = Post.query.filter_by(id=post_id).first()
     pinned = post.pinned

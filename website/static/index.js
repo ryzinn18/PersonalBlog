@@ -70,6 +70,24 @@ function pin(postId) {
       .catch((e) => alert("Could not pin post."));
   }
 
+// function update_post(postId) {
+//     const updatedPost = document.getElementById(`update-post-${postId}`);
+  
+//     fetch(`/update-post/${postId}`, { method: "PATCH" })
+//       .then((res) => res.json())
+//     //   .then((data) => {
+//     //     if (data["status"] === 200) {
+//     //         // pinned.innerHTML = data["pinned"];
+//     //         if (data["pinned"] === true) {
+//     //             pinButton.className = "param fa-solid fa-check";
+//     //         } else {
+//     //             pinButton.className = "param fa-solid fa-location-pin";
+//     //         }
+//     //     }
+//     //   })
+//       .catch((e) => alert("Could not pin post."));
+//   }
+
 
 
 //   Not currently opperational
