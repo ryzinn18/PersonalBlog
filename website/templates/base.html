@@ -24,14 +24,18 @@
                     <a class="nav-item nav-link" href="/home"><b>Home</b></a>
                     <a class="nav-item nav-link" href="/posts"><b>All Posts</b></a>
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="/posts/{{user.username}}"><b>My Posts</b></a>    
                         <a class="nav-item nav-link" href="/logout"><b>Logout({{user.username}})</b></a>  
-                        <i class="fa-solid fa-user" style="padding: .6rem"></i>
-                        <a class="nav-item nav-link fa-solid fa-pen-to-square" href="/create-post" style="padding: .6rem"></a>
+                        {% if user.permissions == "Root" %}
+                            <!-- <a class="nav-item nav-link" href="/posts/{{user.username}}"><b>My Posts</b></a>    --><!-- Hidden for now. Can use once multiple posters are allowed -->
+                            <a class="nav-item nav-link fa-solid fa-pen-to-square" href="/create-post" style="padding: .8rem"></a>
+                            <i class="nav-item nav-link fa-solid fa-user-plus" style="padding: .8rem"></i>
+                        {% else %}
+                            <i class="nav-item nav-link fa-solid fa-user" style="padding: .8rem"></i>
+                        {% endif %}
                     {% else %}
+                        <a class="nav-item nav-link" href="/sign-up"><b>Sign Up</b></a>    
                         <a class="nav-item nav-link" href="/login"><b>Login</b></a>
-                        <a class="nav-item nav-link" href="/sign-up"><b>Sign Up</a>
-                        <i class="fa-regular fa-user" style="padding: .6rem"></i>
+                        <i class="nav-item nav-link fa-regular fa-user" style="padding: .8rem"></i>
                     {% endif %}
                 </ul>
             </div>
