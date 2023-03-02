@@ -131,3 +131,4 @@ dmypy.json
 # Manual additions
 bootstrap_theme
 test.py
+test.html
