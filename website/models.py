@@ -1,6 +1,5 @@
 from . import db
 from flask_login import UserMixin
-from sqlalchemy.sql import func
 from datetime import datetime
 
 
@@ -23,6 +22,7 @@ class Post(db.Model):
     pinned = db.Column(db.Boolean, default=False)
     image = db.Column(db.String(200), default="swamis.jpg")
     date_created = db.Column(db.DateTime(timezone=True), default=datetime.now())
+    date_updated = db.Column(db.DateTime(timezone=True), default=datetime.now())
     author = db.Column(db.Integer, db.ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
     comments = db.relationship("Comment", backref="post", passive_deletes=True)
     likes = db.relationship("Like", backref="post", passive_deletes=True)
