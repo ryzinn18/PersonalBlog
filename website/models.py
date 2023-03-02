@@ -21,7 +21,7 @@ class Post(db.Model):
     description = db.Column(db.String(750))
     text = db.Column(db.Text, nullable=False)
     pinned = db.Column(db.Boolean, default=False)
-    image = db.Column(db.String(200), default="/static/swamis.jpg")
+    image = db.Column(db.String(200), default="swamis.jpg")
     date_created = db.Column(db.DateTime(timezone=True), default=datetime.now())
     author = db.Column(db.Integer, db.ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
     comments = db.relationship("Comment", backref="post", passive_deletes=True)

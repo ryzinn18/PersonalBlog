@@ -70,6 +70,13 @@ def posts(username):
     return render_template("users_posts.html", user=current_user, posts=posts, username=username)
 
 
+@views.route("/post/<post_id>")
+def post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+
+    return render_template("post.html", user=current_user, post=post)
+
+
 @views.route("/create-comment/<post_id>", methods=["POST"])
 @login_required
 def create_comment(post_id):

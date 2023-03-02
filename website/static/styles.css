@@ -30,6 +30,8 @@ header.masthead h1, header.masthead .h1 {
 }
 }
 
+
+
 hr.divider {
     height: 0.2rem;
     max-width: 3.25rem;
@@ -104,6 +106,14 @@ hr.divider {
     }
   }
 
+body.post {
+    padding-top: 10rem;  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    padding-bottom: calc(10rem - 4.5rem);
+  }
 
 body.posts {
   padding-top: 10rem;  
@@ -130,18 +140,17 @@ body.create-post {
   padding-bottom: calc(10rem - 4.5rem);
 }
 
-input[type="checkbox"] {
-  display: none;
+
+
+* { box-sizing: border-box; }
+
+.container-cards { 
+  display: flex; 
+  flex-flow: row wrap;
 }
 
-input[type="checkbox"] + label:before {
-  display: inline-block;
-  font-family: FontAwesome;
-  content: "\f276";
-  color: rgb(79, 79, 79);
-}
-
-input[type="checkbox"]:checked + label:before {
-  content: "\f276";
-  color:rgb(206, 39, 39);
+.card-wrap {
+  flex: 0 0 33.333%;
+  display: flex;
+  padding: 10px; /* gutter width */
 }

@@ -53,7 +53,6 @@ function delete_post(postId) {
 
 
 function pin(postId) {
-    // const pinned = document.getElementById(`likes-count-${postId}`).getAttribute("value");
     const pinButton = document.getElementById(`pin-button-${postId}`);
   
     fetch(`/pin-post/${postId}`, { method: "POST" })
@@ -64,12 +63,9 @@ function pin(postId) {
             if (data["pinned"] === true) {
                 pinButton.className = "param fa-solid fa-check";
             } else {
-                pinButton.className = "param fa-regular fa-location-pin";
+                pinButton.className = "param fa-solid fa-location-pin";
             }
         }
-        // if (data["status"] === 401) {
-        //     window.location.replace("/login");
-        // }
       })
       .catch((e) => alert("Could not pin post."));
   }
