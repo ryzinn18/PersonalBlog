@@ -19,8 +19,8 @@
                     <div class="card-body" style="--bs-bg-opacity: .65;">
                         <!-- Body - Buttons -->
                         {% include "button_group.html" %}
-                        <!-- Body - Date Posted -->
-                        <span><small>Posted on: {{ post.date_created.strftime("%B %d, %Y") }}</small></span>
+                        <!-- Body - Date Posted/Updated -->
+                        {% include "date_group.html" %}
                         <!-- Body - Description (if it exists) -->
                         {% if post.description %}
                             <h3 class="card-text" style="padding-top: 1rem";>{{post.description}}</h3>

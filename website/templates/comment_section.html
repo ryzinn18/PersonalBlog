@@ -7,7 +7,7 @@
             <a href="/posts/{{comment.user.username}}">{{comment.user.username}}</a>: {{comment.text}}
           </div>
           <div>
-            <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y")}}</small>
+            <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y @ %I:%M %p")}}</small>
             <!-- Allow author or commentor to delete comments -->
             {% if user.id == comment.author or user.id == post.author %}
             <div class="btn-group">

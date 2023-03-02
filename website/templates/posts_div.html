@@ -25,7 +25,7 @@
           {% include "comment_section.html" %}
         </div>
         <!-- Card Footer - Date -->
-        <div class="card-footer text-muted">Posted on {{post.date_created.strftime("%B %d, %Y")}}</div>
+        {% include "date_group.html" %}
       </li>
   </ul>
   {% endfor %}

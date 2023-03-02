@@ -1,0 +1,8 @@
+<span>
+    <small>Posted on: {{ post.date_created.strftime("%B %d, %Y @ %I:%M %p") }}</small>
+</span>
+{% if not post.date_created.strftime("%B %d, %Y @ %I:%M %p") == post.date_updated.strftime("%B %d, %Y @ %I:%M %p") %}
+<span>
+    <small><br>Updated on: {{ post.date_updated.strftime("%B %d, %Y @ %I:%M %p") }}</small>
+</span>
+{% endif %}

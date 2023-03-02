@@ -51,7 +51,7 @@
                                     {% if post.description %}
                                         <p class="card-text">{{post.description}}</p>
                                     {% endif %}                                    
-                                    <p class="card-text"><small class="text-muted">Posted on: {{post.date_created.strftime("%B %d, %Y") }}</small></p>
+                                    {% include "date_group.html" %}
                                     <a class="stretched-link" href="/post/{{post.id}}"></a>
                                 </div>
                             </li>
