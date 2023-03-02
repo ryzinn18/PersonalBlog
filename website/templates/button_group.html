@@ -9,7 +9,7 @@
     {% endif %} 
     <!-- Buttons for Post's Author Only -->
     {% if user.id == post.author %}
-      <!-- Display correct pin icon based on whether user has pinned their pos -->
+      <!-- Display correct pin icon based on whether user has pinned their post -->
       {% if post.pinned == False %}
           <i class="param fa-solid fa-location-pin" value="false" id="pin-button-{{post.id}}" onclick="pin({{post.id}})"></i>
       {% else %}

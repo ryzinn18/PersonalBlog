@@ -36,25 +36,32 @@ function delete_comment(commentId) {
 
 
 function delete_post(postId) {
+    // Confirm user want's to delete post. Return if not.
     const response = confirm("Are you sure you want to do delete this post?");
     if (response === false) {
         return
     }
 
-    const post = document.getElementById(`post-${postId}`)
-    const postCard = document.getElementById(`post-card-${postId}`)
-  
+    // Call to delete post
     fetch(`/delete-post/${postId}`, {}) 
     .then((res) => res.json())
     .then((data) => {
-        
+    // Handle call response
         if (data["status"] == 200) {
-            console.log(data)
-            postCard.remove();
+            // Define post card element
+            const postCard = document.getElementById(`post-card-${postId}`)
+            // If you're on a post card page, remove the card.
+            if (postCard) {
+                postCard.remove();
+            }
+            // If you're not on a post card page, redirect to home.
+            else {
+                window.location.replace("/");
+            }
         }
     })
     .catch((e) => alert("Could not delete post."));
-  }
+}
 
 
 function pin(postId) {
@@ -77,23 +84,23 @@ function pin(postId) {
 
 
 //   Not currently opperational
-function post_comment(postId) {
-    const post = document.getElementById(`post-${postId}`)
+// function post_comment(postId) {
+//     const post = document.getElementById(`post-${postId}`)
   
-    fetch(`/create-comment/${postId}`, { method: "POST" })
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data)
-        if (data["text"]) {
-            const commentId = data["comment_id"];
-            const commentDiv = document.createElement('div');
-            commentDiv.setAttribute("id", commentId);
-            commentDiv.className("d-flex justify-content-between align-items-center");
-            const newContent = document.createTextNode("Hi there and greetings!");
-            commentDiv.appendChild(newContent);
-            const currentDiv = document.getElementById((commentId - 1));
-            document.body.insertBefore(newDiv, currentDiv);
-        }
-    })
-    .catch((e) => alert("Could not post comment."));
-  }
+//     fetch(`/create-comment/${postId}`, { method: "POST" })
+//     .then((res) => res.json())
+//     .then((data) => {
+//         console.log(data)
+//         if (data["text"]) {
+//             const commentId = data["comment_id"];
+//             const commentDiv = document.createElement('div');
+//             commentDiv.setAttribute("id", commentId);
+//             commentDiv.className("d-flex justify-content-between align-items-center");
+//             const newContent = document.createTextNode("Hi there and greetings!");
+//             commentDiv.appendChild(newContent);
+//             const currentDiv = document.getElementById((commentId - 1));
+//             document.body.insertBefore(newDiv, currentDiv);
+//         }
+//     })
+//     .catch((e) => alert("Could not post comment."));
+//   }

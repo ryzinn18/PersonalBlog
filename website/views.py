@@ -18,20 +18,24 @@ def home():
 @views.route("/create-post", methods=["GET", "POST"])
 @login_required
 def create_post():
-    if request.method == "POST":
-        title = request.form.get("title")
-        description = request.form.get("description") if request.form.get("description") else None
-        text = request.form.get("text")
-        image = request.form.get("image") if request.form.get("image") else None
+    # Define request parameters
+    title = request.form.get("title")
+    description = request.form.get("description") if request.form.get("description") else None
+    text = request.form.get("text")
+    image = request.form.get("image") if request.form.get("image") else None
 
-        if not text or not title:
-            flash("Post cannot be empty!", category="error")
-            return render_template("create_post.html", user=current_user)
-        else:
-            post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
-            db.session.add(post)
-            db.session.commit()
-            return render_template("post.html", user=current_user, post=post)
+    # Verify parameters
+    if not text or not title:
+        flash("Post cannot be empty!", category="error")
+        return render_template("create_post.html", user=current_user)
+
+    # Create the new post if method is POST
+    if request.method == "POST":
+        post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+
+        return redirect(url_for("views.post", post_id=post.id))
 
     return render_template("create_post.html", user=current_user)
 
@@ -92,7 +96,7 @@ def delete_post(id):
     if not post:
         return jsonify({"error": "Post does not exist.", "status": 400})
     elif current_user.id == post.id:
-        return jsonify({"error": "You do not have permission to delte this post.", "status": 400})
+        return jsonify({"error": "You do not have permission to delte this post.", "status": 401})
     else:
         db.session.delete(post)
         db.session.commit()
