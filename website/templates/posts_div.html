@@ -3,28 +3,31 @@
 {% block content%}
 <div id="posts">
   {% for post in posts %}
-    <!-- Post Card -->
-    <div class="container-sm">
-      <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;" id="post-card-{{post.id}}">
+    
+    <ul class="container-sm">
+      <!-- Post Card -->
+      <li class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;" id="post-card-{{post.id}}">
         <!-- Card Header -->
         <div class="card-header d-flex justify-content-between align-items-center">
-          <label><b>Author: </b><a href="/posts/{{post.user.username}}">{{post.user.username}}</a></label>
+          <label><b>Author: </b><a href="/posts/{{post.user.username}}" style="text-decoration: none; color: #1d5556;">{{post.user.username}}</a></label>
           {% include "button_group.html" %}
         </div>
         <!-- Card Body - Title and Description -->
         <div class="card-body">
-          <div class="card-text"><h2>{{post.title}}</h2></div>
+          <div class="card-text">
+            <h2><a href="/post/{{post.id}}" style="text-decoration: none; color: #005254;">{{post.title}}</a></h2>
+            
+          </div>
           {% if post.description %}
-            <div class="card-text"><b>Brief: </b>{{post.description}}</div><br>
+            <div class="card-text"><b>{{post.description}}</b></div><br>
           {% endif %}
           <!-- Card Body - Comment Section -->
           {% include "comment_section.html" %}
         </div>
         <!-- Card Footer - Date -->
         <div class="card-footer text-muted">Posted on {{post.date_created.strftime("%B %d, %Y")}}</div>
-      </div>
-    </div>
-  <br> 
+      </li>
+  </ul>
   {% endfor %}
 </div>
 {% endblock %}

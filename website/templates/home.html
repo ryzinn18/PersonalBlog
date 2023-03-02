@@ -36,29 +36,29 @@
     <section class="page-section bg-dark-subtle" id="pinned">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <!-- Heading -->
+                <!-- Heading - Pinned Posts -->
                 <h2 class="text-white mt-0 text-center">Pinned Posts</h2>
                 <hr class="divider divider-light" />
-              
-                <!-- Cards -->
-                <div class="container">
+                <!-- Posts -->
+                <ul class="container-sm">
                     <div class="row row-cols-2 justify-content-center">  
                     {% for post in posts %}
                         {% if post.pinned == True %}
-                            <!-- <div class="col">Column</div> -->
-                            <div class="card card-wrap mb-3 ms-3" style="max-width: 500px;">
-                                    <div class="card-body">
-                                      <h5 class="card-title">{{ post.title }}</h5>
-                                      
-                                      <p class="card-text">{{ post.description }}</p>
-                                      <p class="card-text"><small class="text-muted">Posted on: {{post.date_created.strftime("%B %d, %Y") }}</small></p>
-                                      <a href="post/{{ post.id }}" class="card-link">Read Post</a>
-                                    </div>
+                            <!-- Post Card -->
+                            <li class="card card-wrap mb-3 ms-3 bg-light" style="max-width: 500px; --bs-bg-opacity: .50;" id="post-card-{{post.id}}">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ post.title }}</h4>
+                                    {% if post.description %}
+                                        <p class="card-text">{{post.description}}</p>
+                                    {% endif %}                                    
+                                    <p class="card-text"><small class="text-muted">Posted on: {{post.date_created.strftime("%B %d, %Y") }}</small></p>
+                                    <a class="stretched-link" href="/post/{{post.id}}"></a>
                                 </div>
+                            </li>
                         {% endif %}
                     {% endfor %}
-                    </div>
-                </div> 
+                            </div>
+                </ul> 
                 </div>
             </div>
         </div>
