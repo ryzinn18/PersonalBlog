@@ -33,7 +33,7 @@
         </div>
     </section>
     <!-- Pinned Posts -->
-    <section class="page-section bg-dark-subtle" id="pinned">
+    <section class="page-section bg-dark-subtle" id="pinned" >
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <!-- Heading - Pinned Posts -->
@@ -57,9 +57,36 @@
                             </li>
                         {% endif %}
                     {% endfor %}
-                            </div>
+                    </div>
                 </ul> 
                 </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact form -->
+    <section class="page-section" id="contact">
+        <div class="container" >
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <h2 class="mt-0">Let's Get In Touch!</h2>
+                    <hr class="divider" />
+                    <p class="text-muted mb-5">Have questions or comments? I promise this isn't just shouting into the&nbsp;ether.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col col-lg-6">
+                    <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/mnqynyol" method="post">
+                        <fieldset id="fs-frm-inputs">
+                            <input class="form-control" id="full-name" type="text" name="name" placeholder="Enter your name..." /><br>
+                            <input class="form-control" id="email-address" type="email" name="_replyto" placeholder="Enter your email..." /><br>
+                            <textarea class="form-control" id="message" name="message" placeholder="Enter your message..." style="height: 10rem" data-sb-validations="required"></textarea><br>
+                            <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                    <button class="btn btn-primary btn-xl" id="submitButton" type="submit" value="Submit" style="max-width: 100px;">Submit</button>
             </div>
         </div>
     </section>
