@@ -18,6 +18,8 @@
                         <!-- Body - Buttons -->
                         {% include "button_group.html" %}
                         <!-- Body - Date Posted/Updated -->
+                        <!-- Body - Author Button -->
+                        <h5>Author: {{ post.user.username }}</h5>
                         {% include "date_group.html" %}
                         <!-- Body - Description (if it exists) -->
                         {% if post.description != "None" %}
@@ -25,7 +27,7 @@
                         {% endif %}
                         <!-- Body - Post -->
                         <div style="padding-bottom: 2rem; padding-top: 1rem;">
-                            {{post.text}}
+                            <pre>{{post.text}}</pre>
                         </div>
                     </div>  
                     <!-- Footer - Comments -->
