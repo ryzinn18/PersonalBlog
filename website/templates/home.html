@@ -44,12 +44,17 @@
                     </div>
                 </ul>
                 <hr class="divider divider-light" />
-                {% if posts.pinned|length > 0 %}
+                {% set pinned_posts = [] %}
+                {% for post in posts %}
+                    {% if post.pinned %}
+                        {{ pinned_posts.append(post) }}
+                    {% endif %}
+                {% endfor %}
+                {% if pinned_posts|length > 0 %}
                 <!-- Posts -->
                 <ul class="container-sm">
                     <div class="row row-cols-2 justify-content-center">  
-                    {% for post in posts %}
-                        {% if post.pinned == True %}
+                    {% for post in pinned_posts %}
                             <!-- Post Card -->
                             <li class="card card-wrap mb-3 ms-3 bg-light" style="max-width: 500px; --bs-bg-opacity: .8;" id="post-card-{{post.id}}">
                                 <div class="card-body">
@@ -64,28 +69,26 @@
                                     <a class="stretched-link" href="/post/{{post.id}}"></a>
                                 </div>
                             </li>
-                        {% endif %}
                     {% endfor %}
                     </div>
                 </ul> 
                 {% else %}
                 <ul class="container-sm">
                     <li class="card mx-auto bg-light col-lg-5" style="--bs-bg-opacity: .8;">
-                        <h3 class="mt-0 text-center" style="color:  rgb(0, 0, 0);"><b>There aren't any pinned posts currently!</b></h3>
-                    </li>
-                    <li align="center" style="padding: 1rem">
-                        <a href="/home" >
-                            <button type="button" class="btn btn-lg btn-secondary">See All Posts</button>
-                        </a>
+                        <h3 class="mt-0 text-center" style="color:  rgb(0, 0, 0);padding: 0.5rem;"><b>There aren't any pinned posts currently!</b></h3>
                     </li>
                 </ul>
                 {% endif %}
+                <span align="center" style="padding: 1rem">
+                    <a href="/posts" >
+                        <button type="button" class="btn btn-lg btn-secondary">See All Posts</button>
+                    </a>
+                </span>
                 </div>
             </div>
         </div>
     </section>
-
-    <!--  -->
+    <!-- Motivation -->
     <section class="page-section bg-secondary" id="motivation">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -94,7 +97,6 @@
                     <hr class="divider divider-light" />
                     {% include "raw_content/home-motivation.html" %}
                     <p class="text-white-75 mb-4"></p>
-                    <!-- <a class="btn btn-light btn-xl" href="#hobbies">Check out my hobbies!</a> -->
                 </div>
             </div>
         </div>
