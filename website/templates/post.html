@@ -22,7 +22,7 @@
                         <!-- Body - Date Posted/Updated -->
                         {% include "date_group.html" %}
                         <!-- Body - Description (if it exists) -->
-                        {% if post.description %}
+                        {% if post.description != "None" %}
                             <h3 class="card-text" style="padding-top: 1rem";>{{post.description}}</h3>
                         {% endif %}
                         <!-- Body - Post -->

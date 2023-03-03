@@ -18,19 +18,19 @@ def home():
 @views.route("/create-post", methods=["GET", "POST"])
 @login_required
 def create_post():
-    # Define request parameters
-    title = request.form.get("title")
-    description = request.form.get("description") if request.form.get("description") else None
-    text = request.form.get("text")
-    image = request.form.get("image") if request.form.get("image") else None
-
-    # Verify parameters
-    if not text or not title:
-        flash("Post cannot be empty!", category="error")
-        return render_template("create_post.html", user=current_user)
-
-    # Create the new post if method is POST
     if request.method == "POST":
+        # Define request parameters
+        title = request.form.get("title")
+        description = request.form.get("description") if request.form.get("description") else ""
+        text = request.form.get("text")
+        image = request.form.get("image") if request.form.get("image") else None
+
+        # Verify parameters
+        if not text or not title:
+            flash("Post cannot be empty!", category="error")
+            return render_template("create_post.html", user=current_user)
+
+        # Create the new post if method is POST
         post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
         db.session.add(post)
         db.session.commit()
@@ -136,23 +136,25 @@ def post(post_id):
 @views.route("/create-comment/<post_id>", methods=["POST"])
 @login_required
 def create_comment(post_id):
-    text = request.form.get("text")
 
+    text = request.form.get("text")
     if not text:
         flash("Comment cannot be empty!", category="error")
         # return jsonify({"error": "Comment cannot be empty!", "status": 400})
-    else:
-        post = Post.query.filter_by(id=post_id)
-        if post:
-            comment = Comment(text=text, author=current_user.id, post_id=post_id)
-            db.session.add(comment)
-            db.session.commit()
-        else:
-            flash("Post does not exist!", category="error")
-            # return jsonify({"error": "Post does not exist!", "status": 400})
+
+    post = Post.query.filter_by(id=post_id).first()
+    if not post:
+        flash("Post does not exist!", category="error")
+        return jsonify({"error": "Post does not exist!", "status": 400})
+
+    if request.method == "POST":
+        comment = Comment(text=text, author=current_user.id, post_id=post_id)
+        db.session.add(comment)
+        db.session.commit()
+        return render_template("post.html", user=current_user, post=post)
+        # return jsonify({"text": text, "id": comment.id, "author": comment.author, "status": 200})
 
     return redirect(url_for("views.all_posts"))
-    # return jsonify({"text": text, "comment_id": comment.id, "status": 200})
 
 
 @views.route("/delete-comment/<comment_id>")
