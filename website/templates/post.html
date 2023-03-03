@@ -4,11 +4,9 @@
 {% endblock %}
 {% block content %}
 <body class="post" style='background-image: url("/static/{{ post.image }}");'>
-    <div class="container px-4 px-lg-5 h-100">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center">
             <div class="container-sm">
                 <!-- Post Card -->
-                <div class="card col-lg-8 align-self-end bg-light p-2" style="--bs-bg-opacity: .75;">
+                <div class="card col-lg-10 mx-auto bg-light p-2" style="--bs-bg-opacity: .75;">
                     <!-- Card Header - Title -->
                     <div class="card-header d-flex justify-content-between align-items-center" style="--bs-bg-opacity: .85;">
                         <h1 class="text-black font-weight-bold text-center justify-content-center" style="padding-bottom: 1.5rem; padding-top: 1.5rem;">
@@ -36,7 +34,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </body>
 {% endblock %}
