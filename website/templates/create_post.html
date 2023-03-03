@@ -2,37 +2,35 @@
 {% block title %}Create Post{% endblock %}
 {% block content %}
 <body class="create-post">
-    <div class="container px-4 px-lg-5 h-100">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
-            <div class="col-lg-8 card border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
-                <form class="form-group container-sm" method="POST" action="/create-post">
-                    <h1 class="text-black font-weight-bold text-center"><b>Create a Post</b></h1>
-                    <hr class="divider" />
+    <div class="container-sm">
+        <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
+            <form class="form-group container-sm" method="POST" action="/create-post">
+                <h1 class="text-black font-weight-bold text-center"><b>Create a Post</b></h1>
+                <hr class="divider" />
 
-                    <label for="title"><b>Post Title</b></label>
-                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title"/><br>
-                    
-                    <label for="description"><b>Description</b></label>
-                    <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea>
-                    
-                    <label for="text"><b>Post Body</b></label>
-                    <textarea name="text" id="text" class="form-control" placeholder="Write Post Here"></textarea>
-                    
-                    <label for="image"><b>Image Name</b> (including extension)</label>
-                    <input type="text" id="image" name="image" class="form-control" rows="10" placeholder="Optional Image Name"/><br>
-                    <br>
-                    <div align="center">
-                        <button type="submit" class="btn btn-lg btn-primary">Post</button>
-                    </div>
-                    <br>
+                <label for="title"><b>Post Title</b></label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title"/><br>
+                
+                <label for="description"><b>Description</b></label>
+                <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea>
+                
+                <label for="text"><b>Post Body</b></label>
+                <textarea name="text" id="text" class="form-control" placeholder="Write Post Here"></textarea>
+                
+                <label for="image"><b>Image Name</b> (including extension)</label>
+                <input type="text" id="image" name="image" class="form-control" rows="10" placeholder="Optional Image Name"/><br>
+                <br>
+                <div align="center">
+                    <button type="submit" class="btn btn-lg btn-primary">Post</button>
+                </div>
+                <br>
             </form>
-            </div>
-            <div align="center" style="padding: 4rem">
-                <a href="/home" >
-                    <button type="button" class="btn btn-lg btn-secondary">Return Home</button>
-                </a>
-            </div>
         </div>
-    </div>
+        <div align="center" style="padding: 4rem">
+            <a href="/home" >
+                <button type="button" class="btn btn-lg btn-secondary">Return Home</button>
+            </a>
+        </div>
+    </div> 
 </body>
 {% endblock %}
