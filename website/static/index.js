@@ -86,20 +86,34 @@ function pin(postId) {
 //   Not currently opperational
 // function post_comment(postId) {
 //     const post = document.getElementById(`post-${postId}`)
-  
+
+//     // var request = new XMLHttpRequest()
+//     // request.open("POST", `/create-comment/${postId}`)
+
 //     fetch(`/create-comment/${postId}`, { method: "POST" })
 //     .then((res) => res.json())
 //     .then((data) => {
 //         console.log(data)
-//         if (data["text"]) {
-//             const commentId = data["comment_id"];
+//         if (data["status"] == 200) {
+//             const commentCard = document.getElementById(`comments-${postId}`)
+//             const commentId = data["id"];
+//             const commentText = data["text"];
+//             const commentAuthor = data["author"];
+            
+//             // Individual Comment
 //             const commentDiv = document.createElement('div');
-//             commentDiv.setAttribute("id", commentId);
 //             commentDiv.className("d-flex justify-content-between align-items-center");
-//             const newContent = document.createTextNode("Hi there and greetings!");
-//             commentDiv.appendChild(newContent);
-//             const currentDiv = document.getElementById((commentId - 1));
-//             document.body.insertBefore(newDiv, currentDiv);
+//             commentDiv.setAttribute("id", commentId);
+//             // Comment Author & Text
+//             const textDiv = document.createElement('div');
+//             const textText = document.createTextNode(commentAuthor + ": " + commentText);
+//             textDiv.appendChild(textText);
+//             // Insert rest of comment body here
+            
+//             commentDiv.appendChild(textDiv);
+//             commentCard.appendChild(commentDiv)
+//         } else {
+//             alert(data["error"])
 //         }
 //     })
 //     .catch((e) => alert("Could not post comment."));
