@@ -1,8 +1,8 @@
 <div>
-    <small>Posted on: {{ post.date_created.strftime("%B %d, %Y @ %I:%M %p") }}</small>
+    <small>Posted on: {{ post.date_created.strftime("%B %-d, %Y @ %-I:%M %p") }}</small>
 </div>
-{% if not post.date_created.strftime("%B %d, %Y @ %I:%M %p") == post.date_updated.strftime("%B %d, %Y @ %I:%M %p") %}
+{% if not post.date_created.strftime("%B %d, %Y @ %I:%M %p") == post.date_updated.strftime("%B %-d, %Y @ %-I:%M %p") %}
 <div>
-    <small style="margin: 0px 0;">Updated on: {{ post.date_updated.strftime("%B %d, %Y @ %I:%M %p") }}</small>
+    <small style="margin: 0px 0;">Updated on: {{ post.date_updated.strftime("%B %-d, %Y @ %-I:%M %p") }}</small>
 </div>
 {% endif %}
