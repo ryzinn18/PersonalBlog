@@ -48,10 +48,13 @@
                             <li class="card card-wrap mb-3 ms-3 bg-light" style="max-width: 500px; --bs-bg-opacity: .50;" id="post-card-{{post.id}}">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ post.title }}</h4>
-                                    {% if post.description %}
+                                    
+                                    {% if post.description != "None" %}
                                         <p class="card-text">{{post.description}}</p>
-                                    {% endif %}                                    
+                                    {% endif %}     
+                                    <div>                              
                                     {% include "date_group.html" %}
+                                    </div> 
                                     <a class="stretched-link" href="/post/{{post.id}}"></a>
                                 </div>
                             </li>
