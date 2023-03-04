@@ -32,6 +32,8 @@ def sign_up():
     if request.method == "POST":
         username = request.form.get("username")
         email = request.form.get("email")
+        first_name = request.form.get("fName")
+        last_name = request.form.get("lName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
@@ -42,6 +44,8 @@ def sign_up():
             flash("Email is already in use!", category="error")
         elif username_exists:
             flash("Username is already in use!", category="error")
+        elif not first_name or not last_name:
+            flash("You must enter a First and Last name!")
         elif password1 != password2:
             flash("Passwords do not match!", category="error")
         elif len(username) < 2:
@@ -49,7 +53,13 @@ def sign_up():
         elif len(password1) < 6:
             flash("Password is too short!", category="error")
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(password1, method="sha256"))
+            new_user = User(
+                email=email,
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                password=generate_password_hash(password1, method="sha256"),
+            )
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -64,6 +74,8 @@ def sign_up_root():
     if request.method == "POST":
         username = request.form.get("username")
         email = request.form.get("email")
+        first_name = request.form.get("fName")
+        last_name = request.form.get("lName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
@@ -74,6 +86,8 @@ def sign_up_root():
             flash("Email is already in use!", category="error")
         elif username_exists:
             flash("Username is already in use!", category="error")
+        elif not first_name or not last_name:
+            flash("You must enter a First and Last name!")
         elif password1 != password2:
             flash("Passwords do not match!", category="error")
         elif len(username) < 2:
@@ -84,6 +98,8 @@ def sign_up_root():
             new_user = User(
                 email=email,
                 username=username,
+                first_name=first_name,
+                last_name=last_name,
                 password=generate_password_hash(password1, method="sha256"),
                 permissions="Root",
             )

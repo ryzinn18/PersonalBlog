@@ -5,8 +5,10 @@ from datetime import datetime
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
-    username = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    first_name = db.Column(db.String(15), nullable=False)
+    last_name = db.Column(db.String(25), nullable=False)
     password = db.Column(db.String(150))
     date_created = db.Column(db.DateTime(timezone=True), default=datetime.now())
     permissions = db.Column(db.String(10), default="Viewer")

@@ -1,24 +1,25 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %}
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
 {% block content %}
-<section class="page-section bg-dark-subtle" style="padding: 8rem" id="login">
-<form method="POST">
+<body style="padding: 8rem; background-color: rgb(116, 116, 116)">
+    <form method="POST" id="sign-up">
     <h3 align="center">Login</h3>
-    <div class="form-group  container-sm">
+    <div class="form-group mx-auto" style="max-width: 450px;">
         <label for="email">Email Address</label>
         <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email"/>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"/>
         <br>
         <div align="center">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn text-bg-dark" type="submit">Login</button>
         </div>
         <br>
         <center>
             <label>Don't have an account?</label>
             <br>
-            <a href="/sign-up">Sign Up</a>
+            <a class="link-dark"href="/sign-up">Sign Up</a>
         </center>
     </div>
 </form>
-</section>
+</body>
 {% endblock %}
