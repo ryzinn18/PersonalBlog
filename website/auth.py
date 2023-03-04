@@ -11,18 +11,22 @@ auth = Blueprint("auth", __name__)
 @auth.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email")
+        email_or_username = request.form.get("email-or-username")
         password = request.form.get("password")
 
-        user = User.query.filter_by(email=email).first()
+        # Logic for allowing users to enter username or email
+        from_email = User.query.filter_by(email=email_or_username).first()
+        from_username = User.query.filter_by(username=email_or_username).first()
+        user = from_email if from_email else from_username
+
         if user:
             if check_password_hash(user.password, password):
                 login_user(user, remember=True)
                 return redirect(url_for("views.home"))
             else:
-                flash(f"Password entered for {email} is incorrect.", category="error")
+                flash(f"Password entered for {email_or_username} is incorrect.", category="error")
         else:
-            flash(f"There is no user account with email: {email}.", category="error")
+            flash(f"There is no user account with email/username: {email_or_username}.", category="error")
 
     return render_template("login.html", user=current_user)
 
