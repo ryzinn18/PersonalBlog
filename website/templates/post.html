@@ -43,7 +43,7 @@
                       </div>
                       <!-- Comment Date and Option to Delete -->
                       <div>
-                        <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y @ %I:%M %p")}}</small>
+                        <small class="text-muted"> {{comment.date_created.strftime("%B %-d, %Y @ %-I:%M %p")}}</small>
                         <!-- Allow author or commentor to delete comments -->
                         {% if user.id == comment.author or user.id == post.author  or user.permissions == "Root"%}
                           <i class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick=delete_comment({{comment.id}})></i>
