@@ -16,16 +16,58 @@
         <div class="card-body">
           <div class="card-text">
             <h2><a href="/post/{{post.id}}" style="text-decoration: none; color: #005254;">{{post.title}}</a></h2>
-            
           </div>
           {% if post.description != "None" %}
             <div class="card-text"><b>{{post.description}}</b></div><br>
           {% endif %}
-          <!-- Card Body - Comment Section -->
-          {% include "comment_section.html" %}
         </div>
+        <!-- Whole Collapsable Container -->
+        <div style="padding-left: 1rem; padding-bottom: 1rem;">
+        <div class="collapse" id="comments-{{post.id}}">
+          <!-- Whole Comment Section When Expanded -->
+          <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;">
+            <div class="card-body" id="comments-expanded-{{post.id}}">
+              {% for comment in post.comments %}
+
+              <!-- Individual Comment -->
+              <div class="d-flex justify-content-between align-items-center" id="comment-{{comment.id}}">
+                <!-- Comment Author and Text -->
+                <div>
+                  {{comment.user.username}}: {{comment.text}}
+                </div>
+                <!-- Comment Date and Option to Delete -->
+                <div>
+                  <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y @ %I:%M %p")}}</small>
+                  <!-- Allow author or commentor to delete comments -->
+                  {% if user.id == comment.author or user.id == post.author  or user.permissions == "Root"%}
+                    <i class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick=delete_comment({{comment.id}})></i>
+                  {% endif %}
+                </div>
+              </div>
+              <!-- End Individual Comment -->
+              
+              {% endfor %}
+            </div>
+          </div>
+      </div>
+      <!-- End Collapsable Comment Card -->
+
+      <!-- Button for expanding comment section -->
+      <div class="card-text"  style="padding-top: 1rem">
+        {% if post.comments|length == 1 %}
+            <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                <button class="btn btn-secondary">View 1 Comment</button>
+            </a>
+        {% elif post.comments|length > 1 %}
+            <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                <button class="btn btn-secondary">View {{post.comments|length}} Comments</button>
+            </a>
+        {% else %}
+            <small class="text-muted">No Comments</small>
+        {% endif %}
+      </div></div>
         <!-- Card Footer - Date -->
-        <div style="padding-left: 1.1rem">
+        <div class="card-footer" style="padding-left: 1.1rem">
         {% include "date_group.html" %}
         </div>
       </li>

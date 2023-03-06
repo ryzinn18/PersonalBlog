@@ -4,37 +4,60 @@
 {% endblock %}
 {% block content %}
 <body class="post" style='background-image: url("/static/{{ post.image }}");'>
-            <div class="container-sm">
-                <!-- Post Card -->
-                <div class="card col-lg-10 mx-auto bg-light p-2" style="--bs-bg-opacity: .75;">
-                    <!-- Card Header - Title -->
-                    <div class="card-header d-flex justify-content-between align-items-center" style="--bs-bg-opacity: .85;">
-                        <h1 class="text-black font-weight-bold text-center justify-content-center" style="padding-bottom: 1.5rem; padding-top: 1.5rem;">
-                            <b>{{ post.title }}</b>
-                        </h1>
-                    </div>
-                    <!-- Card Body - Buttons, Post Date, Description, Post -->
-                    <div class="card-body" style="--bs-bg-opacity: .65;">
-                        <!-- Body - Buttons -->
-                        {% include "button_group.html" %}
-                        <!-- Body - Date Posted/Updated -->
-                        <!-- Body - Author Button -->
-                        <h5>Author: {{ post.user.username }}</h5>
-                        {% include "date_group.html" %}
-                        <!-- Body - Description (if it exists) -->
-                        {% if post.description != "None" %}
-                            <h3 class="card-text" style="padding-top: 1rem";>{{post.description}}</h3>
-                        {% endif %}
-                        <!-- Body - Post -->
-                        <div style="padding-bottom: 2rem; padding-top: 1rem;">
-                            <pre>{{post.text}}</pre>
-                        </div>
-                    </div>  
-                    <!-- Footer - Comments -->
-                    <div class="card-footer">
-                        {% include "comment_section.html" %}
-                    </div>
-                </div>
+    <div class="container-sm">
+        <!-- Post Card -->
+        <div class="card col-lg-10 mx-auto bg-light p-2" style="--bs-bg-opacity: .75;">
+            <!-- Card Header - Title -->
+            <div class="card-header d-flex justify-content-between align-items-center" style="--bs-bg-opacity: .85;">
+                <h1 class="text-black font-weight-bold text-center justify-content-center" style="padding-bottom: 1.5rem; padding-top: 1.5rem;">
+                    <b>{{ post.title }}</b>
+                </h1>
             </div>
+            <!-- Card Body - Buttons, Post Date, Description, Post -->
+            <div class="card-body" style="--bs-bg-opacity: .65;">
+                <!-- Body - Buttons -->
+                {% include "button_group.html" %}
+                <!-- Body - Date Posted/Updated -->
+                <!-- Body - Author Button -->
+                <h5>Author: {{ post.user.username }}</h5>
+                {% include "date_group.html" %}
+                <!-- Body - Description (if it exists) -->
+                {% if post.description != "None" %}
+                    <h3 class="card-text" style="padding-top: 1rem";>{{post.description}}</h3>
+                {% endif %}
+                <!-- Body - Post -->
+                <div style="padding-bottom: 2rem; padding-top: 1rem;">
+                    <pre>{{post.text}}</pre>
+                </div>
+            </div>  
+            <!-- Footer - Comments -->
+            <div class="card-footer">
+                <div class="card-body" id="comments-expanded-{{post.id}}">
+                    {% for comment in post.comments %}
+          
+                    <!-- Individual Comment -->
+                    <div class="d-flex justify-content-between align-items-center" id="comment-{{comment.id}}">
+                      <!-- Comment Author and Text -->
+                      <div>
+                        {{comment.user.username}}: {{comment.text}}
+                      </div>
+                      <!-- Comment Date and Option to Delete -->
+                      <div>
+                        <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y @ %I:%M %p")}}</small>
+                        <!-- Allow author or commentor to delete comments -->
+                        {% if user.id == comment.author or user.id == post.author  or user.permissions == "Root"%}
+                          <i class="fas fa-trash" id="delete-comment-button-{{post.id}}" onclick=delete_comment({{comment.id}})></i>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}" id="create-comment-{{post.id}}">
+                    <input type="text" id="comment-text" name="text" class="form-control" placeholder="Leave a comment..."/>
+                    <button type="submit" class="btn btn-dark" >Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 {% endblock %}
