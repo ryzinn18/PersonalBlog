@@ -24,54 +24,47 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="text-white mt-0">Ryan in a nutshell</h2>
                     <hr class="divider divider-light" />
-                    <p class="text-white-75 mb-4">I am 27 years old and from San Diego, CA. Specifically, I am from Encinitas, a small beach town in Northern San Diego County. Growing up I spent most of my free time surfing and exploring San Diego with my friends. As I got older, I picked up some new hobbies, though, surfing is still my favorite of them. My new hobbies included traveling, playing music, and&nbsp;coding.</p>
-
-                    <p class="text-white-75 mb-4">Currently, I live in Santa Barbara, CA. I resigned from my previous job in September '22 in favor of working at my favorite wine bar & tap house - Corks & Crowns - while I build a portfolio and train up on the skills I need to land my next job as a software developer. I still plan on working one day per week at Corks & Crowns after landing my next role though, being there feels like being at my home away from&nbsp;home.</p>
-                    <!-- <a class="btn btn-light btn-xl" href="#hobbies">Check out my hobbies!</a> -->
+                    {% include "raw_content/home-about.html" %}
                 </div>
             </div>
         </div>
     </section>
     <!-- Pinned Posts -->
-
     <section class="main bg-dark-subtle" id="pinned" style='background-image: url("/static/steamboat.jpg");'>
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <!-- Heading - Pinned Posts -->
-                <ul class="container-sm">
+                <div class="container-sm">
                     <div class="card mx-auto bg-light col-lg-3" style="--bs-bg-opacity: .8;">
                         <h1 class="mt-0 text-center" style="color:  rgb(0, 0, 0);"><b>Pinned Posts</b></h1>
                     </div>
-                </ul>
-                <hr class="divider divider-light" />
+                    <hr class="divider divider-light"/>
                 {% set pinned_posts = [] %}
                 {% for post in posts %}
                     {% if post.pinned %}
-                        {{ pinned_posts.append(post) }}
+                        <div hidden>{{ pinned_posts.append(post) }}</div>
                     {% endif %}
                 {% endfor %}
                 {% if pinned_posts|length > 0 %}
                 <!-- Posts -->
-                <ul class="container-sm">
                     <div class="row row-cols-2 justify-content-center">  
                     {% for post in pinned_posts %}
-                            <!-- Post Card -->
-                            <li class="card card-wrap mb-3 ms-3 bg-light" style="max-width: 500px; --bs-bg-opacity: .8;" id="post-card-{{post.id}}">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ post.title }}</h4>
-                                    
-                                    {% if post.description != "None" %}
-                                        <p class="card-text">{{post.description}}</p>
-                                    {% endif %}     
-                                    <div>                              
+                        <!-- Post Card -->
+                        <div class="card card-wrap mb-3 ms-3 bg-light" style="max-width: 500px; --bs-bg-opacity: .8;" id="post-card-{{post.id}}">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ post.title }}</h4>
+                                {% if post.description != "None" %}
+                                    <p class="card-text">{{post.description}}</p>
+                                {% endif %}     
+                                <div>                              
                                     {% include "date_group.html" %}
-                                    </div> 
-                                    <a class="stretched-link" href="/post/{{post.id}}"></a>
-                                </div>
-                            </li>
+                                </div> 
+                                <a class="stretched-link" href="/post/{{post.id}}"></a>
+                            </div>
+                        </div>
                     {% endfor %}
                     </div>
-                </ul> 
+                </div> 
                 {% else %}
                 <ul class="container-sm">
                     <li class="card mx-auto bg-light col-lg-5" style="--bs-bg-opacity: .8;">
@@ -84,7 +77,6 @@
                         <button type="button" class="btn btn-lg btn-secondary">See All Posts</button>
                     </a>
                 </span>
-                </div>
             </div>
         </div>
     </section>
@@ -96,7 +88,6 @@
                     <h2 class="text-white mt-0">Why the Blog?</h2>
                     <hr class="divider divider-light" />
                     {% include "raw_content/home-motivation.html" %}
-                    <p class="text-white-75 mb-4"></p>
                 </div>
             </div>
         </div>
