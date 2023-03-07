@@ -83,38 +83,24 @@ function pin(postId) {
   }
 
 
-//   Not currently opperational
-// function post_comment(postId) {
-//     const post = document.getElementById(`post-${postId}`)
-
-//     // var request = new XMLHttpRequest()
-//     // request.open("POST", `/create-comment/${postId}`)
-
-//     fetch(`/create-comment/${postId}`, { method: "POST" })
-//     .then((res) => res.json())
-//     .then((data) => {
-//         console.log(data)
-//         if (data["status"] == 200) {
-//             const commentCard = document.getElementById(`comments-${postId}`)
-//             const commentId = data["id"];
-//             const commentText = data["text"];
-//             const commentAuthor = data["author"];
-            
-//             // Individual Comment
-//             const commentDiv = document.createElement('div');
-//             commentDiv.className("d-flex justify-content-between align-items-center");
-//             commentDiv.setAttribute("id", commentId);
-//             // Comment Author & Text
-//             const textDiv = document.createElement('div');
-//             const textText = document.createTextNode(commentAuthor + ": " + commentText);
-//             textDiv.appendChild(textText);
-//             // Insert rest of comment body here
-            
-//             commentDiv.appendChild(textDiv);
-//             commentCard.appendChild(commentDiv)
-//         } else {
-//             alert(data["error"])
-//         }
-//     })
-//     .catch((e) => alert("Could not post comment."));
-//   }
+function toggle_subscription(userId) {
+    const subscriptionStatus = document.getElementById(`subscription-status-${userId}`)
+    const subscribedIcon = document.getElementById(`subscribed-${userId}`);
+    
+    fetch(`/subscribe/${userId}`)
+        .then((res) => res.json())
+        .then((data) => {
+            if (data["status"] === 200) {
+                subscriptionStatus.innerHTML = data["subscribed"];
+                if (data["subscribed"] === true) {
+                    subscribedIcon.className = "nav-item nav-link fa-solid fa-envelope";
+                } else {
+                    subscribedIcon.className = "nav-item nav-link fa-regular fa-envelope";
+                }
+            }
+            if (data["status"] === 400) {
+                alert(data["error"]);
+            }
+      })
+      .catch((e) => alert(e));
+}

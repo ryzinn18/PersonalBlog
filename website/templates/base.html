@@ -32,6 +32,11 @@
                             <i class="nav-item nav-link fa-solid fa-user-plus" style="padding: .8rem"></i>
                         {% else %}
                             <i class="nav-item nav-link fa-solid fa-user" style="padding: .8rem"></i>
+                            {% if user.subscribed == True %}
+                                <i class="nav-item nav-link fa-solid fa-envelope" style="padding: .8rem" onclick=toggle_subscription({{ user.id }}) id="subscribed-{{ user.id }}"><span hidden id="subscription-status-{{ user.id }}">True</span></i>
+                            {% else %}
+                                <i class="nav-item nav-link fa-regular fa-envelope" style="padding: .8rem" onclick=toggle_subscription({{ user.id }}) id="subscribed-{{ user.id }}"><span hidden id="subscription-status-{{ user.id }}">False</span></i>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         <a class="nav-item nav-link" href="/sign-up"><b>Sign Up</a>    

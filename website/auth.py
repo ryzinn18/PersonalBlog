@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -40,6 +40,7 @@ def sign_up():
         last_name = request.form.get("lName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
+        subscribe = True if (request.form.get("subscribe") == "subscribe") else False
 
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
@@ -63,11 +64,11 @@ def sign_up():
                 first_name=first_name,
                 last_name=last_name,
                 password=generate_password_hash(password1, method="sha256"),
+                subscribed=subscribe,
             )
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash("User Created!")
             return redirect(url_for("views.home"))
 
     return render_template("signup.html", user=current_user)
@@ -106,6 +107,7 @@ def sign_up_root():
                 last_name=last_name,
                 password=generate_password_hash(password1, method="sha256"),
                 permissions="Root",
+                subscribed=False,
             )
             db.session.add(new_user)
             db.session.commit()
@@ -114,6 +116,29 @@ def sign_up_root():
             return redirect(url_for("views.home"))
 
     return render_template("signup.html", user=current_user)
+
+
+@auth.route("/subscribe/<user_id>")
+@login_required
+def subscribe(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    if user:
+        new_subscribption = False if user.subscribed else True
+        user.subscribed = new_subscribption
+        db.session.commit()
+
+        flash(f"User's subscription status updated to: {new_subscribption}", category="success")
+        return jsonify(
+            {
+                "success": f"User's subscription status updated to: {new_subscribption}",
+                "subscribed": new_subscribption,
+                "status": 200,
+            }
+        )
+
+    flash("User's subscription status could not be updated", category="error")
+    return jsonify({"error": "User's subscription status could not be updated", "status": 400})
 
 
 @auth.route("/logout")
