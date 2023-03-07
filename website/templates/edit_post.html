@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Update Post{% endblock %}
 {% block content %}
-<body class="create-post">
+<section class="create-post">
     <div class="container-sm">
             <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
                 <form class="form-group container-sm" method="POST" action="/update-post/{{post.id}}" id="update-post-{{post.id}}">
@@ -15,7 +15,7 @@
                     <textarea name="description" id="description" class="form-control">{{ post.description }}</textarea>
                     
                     <label for="text"><b>Post Body</b></label>
-                    <textarea name="text" id="text" class="form-control">{{ post.text }}</textarea>
+                    <textarea name="text" id="text" style="height: 10rem" class="form-control">{{ post.text }}</textarea>
                     
                     <label for="image"><b>Image Name</b> (including extension)</label>
                     <input type="text" id="image" name="image" class="form-control" rows="10" value="{{ post.image }}"/><br>
@@ -33,5 +33,5 @@
                 </a>
             </div>
     </div>
-</body>
+</section>
 {% endblock %}

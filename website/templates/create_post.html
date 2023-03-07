@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Create Post{% endblock %}
 {% block content %}
-<body class="create-post">
+<section class="create-post">
     <div class="container-sm">
         <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
             <form class="form-group container-sm" method="POST" action="/create-post">
@@ -15,7 +15,7 @@
                 <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea>
                 
                 <label for="text"><b>Post Body</b></label>
-                <textarea name="text" id="text" class="form-control" placeholder="Write Post Here"></textarea>
+                <textarea name="text" id="text" class="form-control" style="height: 10rem" placeholder="Write Post Here"></textarea>
                 
                 <label for="image"><b>Image Name</b> (including extension)</label>
                 <input type="text" id="image" name="image" class="form-control" rows="10" placeholder="Optional Image Name"/><br>
@@ -32,5 +32,5 @@
             </a>
         </div>
     </div> 
-</body>
+</section>
 {% endblock %}

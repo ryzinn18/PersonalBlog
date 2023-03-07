@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<body style="padding: 8rem; background-color: rgb(116, 116, 116)">
+<section class="auth">
     <form method="POST" id="sign-up">
-    <h3 align="center">Login</h3>
-    <div class="form-group mx-auto" style="max-width: 450px;">
-        <label for="email-or-username">Username or Email Address</label>
-        <input type="text" id="email-or-username" name="email-or-username" class="form-control" placeholder="Enter Email or Username"/>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"/>
-        <br>
-        <div align="center">
-            <button class="btn text-bg-dark" type="submit">Login</button>
-        </div>
-        <br>
-        <center>
-            <label>Don't have an account?</label>
+        <h3 align="center">Login</h3>
+        <div class="form-group mx-auto" style="max-width: 450px;">
+            <label for="email-or-username">Username or Email Address</label>
+            <input type="text" id="email-or-username" name="email-or-username" class="form-control" placeholder="Enter Email or Username"/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"/>
             <br>
-            <a class="link-dark"href="/sign-up">Sign Up</a>
-        </center>
+            <div align="center">
+                <button class="btn text-bg-dark" type="submit">Login</button>
+            </div>
+            <br>
+        </div>
+    </form>
+    <div align="center" style="padding-bottom: 8rem;">
+        <label>Don't have an account?</label>
+        <br>
+        <a class="link-dark"href="/sign-up">Sign Up</a>
     </div>
-</form>
-</body>
+</section>
 {% endblock %}

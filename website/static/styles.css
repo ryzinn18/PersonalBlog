@@ -96,7 +96,7 @@ hr.divider {
       color: #212529;
     }
     #mainNav.navbar-shrink .navbar-brand:hover {
-      color: #f4623a;
+      color: #07336d;
     }
     #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
       color: #212529;
@@ -106,7 +106,7 @@ hr.divider {
     }
   }
 
-body.post {
+section.post {
     padding-top: 10rem;  
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -115,14 +115,15 @@ body.post {
     padding-bottom: calc(10rem - 4.5rem);
   }
 
-body.posts {
+section.posts {
   padding-top: 10rem;  
   background-image: url("/static/swamis.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  padding-bottom: calc(10rem - 4.5rem);
+  padding-bottom: 8rem;
+  height: 90hv;
 }
 
 .bg-light-opacity {
@@ -130,7 +131,7 @@ body.posts {
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
-body.create-post {
+section.create-post {
   padding-top: 10rem;  
   background-image: url("/static/singapore.jpg");
   background-repeat: no-repeat;
@@ -138,6 +139,19 @@ body.create-post {
   background-position: center;
   background-size: cover;
   padding-bottom: calc(10rem - 4.5rem);
+}
+
+body {
+  background-color: #f8f9fa;
+  margin: 0px;
+  height: 100%;
+}
+
+section.auth {
+  background-color: rgb(116, 116, 116);
+  padding: 8rem; 
+  padding-bottom: 8rem;
+  height: 90vh;
 }
 
 
@@ -172,10 +186,6 @@ section-pic {
   padding-bottom: 0;
 }
 }
-
-
-
-
 
 section.main {
   padding-top: 8rem;
