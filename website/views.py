@@ -138,11 +138,11 @@ def post(post_id):
 def create_comment(post_id):
 
     text = request.form.get("text")
+    post = Post.query.filter_by(id=post_id).first()
+
     if not text:
         flash("Comment cannot be empty!", category="error")
-        # return jsonify({"error": "Comment cannot be empty!", "status": 400})
-
-    post = Post.query.filter_by(id=post_id).first()
+        return render_template("post.html", user=current_user, post=post)
     if not post:
         flash("Post does not exist!", category="error")
         return jsonify({"error": "Post does not exist!", "status": 400})
@@ -152,7 +152,6 @@ def create_comment(post_id):
         db.session.add(comment)
         db.session.commit()
         return render_template("post.html", user=current_user, post=post)
-        # return jsonify({"text": text, "id": comment.id, "author": comment.author, "status": 200})
 
     return redirect(url_for("views.all_posts"))
 

@@ -195,3 +195,10 @@ section.main {
   background-attachment: scroll;
   background-size: cover;
 }
+
+div.alert {
+  position: fixed; 
+  left: 50%; 
+  top: 10%; 
+  transform: translate(-50%, 0);
+}
