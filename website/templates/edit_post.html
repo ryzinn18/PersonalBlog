@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Update Post{% endblock %}
 {% block content %}
-<section class="create-post">
+<body class="post" style='background-image: url("/static/singapore.jpg");'>
     <div class="container-sm">
             <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
                 <form class="form-group container-sm" method="POST" action="/update-post/{{post.id}}" id="update-post-{{post.id}}">
@@ -33,5 +33,5 @@
                 </a>
             </div>
     </div>
-</section>
+</body>
 {% endblock %}

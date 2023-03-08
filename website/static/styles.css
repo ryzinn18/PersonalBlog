@@ -106,17 +106,17 @@ hr.divider {
     }
   }
 
-section.post {
+body.post {
     padding-top: 10rem;  
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    padding-bottom: calc(10rem - 4.5rem);
+    padding-bottom: 10rem; 
     height: 100vh;
   }
 
-section.posts {
+body.posts {
   padding-top: 10rem;  
   background-image: url("/static/swamis.jpg");
   background-repeat: no-repeat;
@@ -139,12 +139,16 @@ section.create-post {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  padding-bottom: calc(10rem - 4.5rem);
+  padding-bottom: 8rem;
   height: 100vh;
 }
 
 body {
   background-color: #f8f9fa;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
   margin: 0px;
   height: 100%;
 }
