@@ -113,6 +113,7 @@ section.post {
     background-position: center;
     background-size: cover;
     padding-bottom: calc(10rem - 4.5rem);
+    height: 100vh;
   }
 
 section.posts {
@@ -123,7 +124,7 @@ section.posts {
   background-position: center;
   background-size: cover;
   padding-bottom: 8rem;
-  height: 90hv;
+  height: 100vh;
 }
 
 .bg-light-opacity {
@@ -139,6 +140,7 @@ section.create-post {
   background-position: center;
   background-size: cover;
   padding-bottom: calc(10rem - 4.5rem);
+  height: 100vh;
 }
 
 body {
@@ -151,7 +153,7 @@ section.auth {
   background-color: rgb(116, 116, 116);
   padding: 8rem; 
   padding-bottom: 8rem;
-  height: 90vh;
+  height: 100vh;
 }
 
 
