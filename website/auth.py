@@ -128,7 +128,6 @@ def subscribe(user_id):
         user.subscribed = new_subscribption
         db.session.commit()
 
-        flash(f"User's subscription status updated to: {new_subscribption}", category="success")
         return jsonify(
             {
                 "success": f"User's subscription status updated to: {new_subscribption}",
@@ -136,9 +135,8 @@ def subscribe(user_id):
                 "status": 200,
             }
         )
-
-    flash("User's subscription status could not be updated", category="error")
-    return jsonify({"error": "User's subscription status could not be updated", "status": 400})
+    else:
+        return jsonify({"error": "User's subscription status could not be updated", "status": 400})
 
 
 @auth.route("/logout")

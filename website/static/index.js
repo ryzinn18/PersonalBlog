@@ -84,22 +84,30 @@ function pin(postId) {
 
 
 function toggle_subscription(userId) {
-    const subscriptionStatus = document.getElementById(`subscription-status-${userId}`)
+    // When the mail icon in the navbar is clicked on, this toggles the user's subscription status
+    // and updates the icon from a hollow envelope to a solid one.
+    // const subscriptionStatus = document.getElementById(`subscription-status-${userId}`)
     const subscribedIcon = document.getElementById(`subscribed-${userId}`);
+    const subscribedHomeIcon = document.getElementById(`subscribed-home-${userId}`)
+    const subscribedHomeText = document.getElementById(`subscribed-text-${userId}`)
     
     fetch(`/subscribe/${userId}`)
         .then((res) => res.json())
         .then((data) => {
             if (data["status"] === 200) {
-                subscriptionStatus.innerHTML = data["subscribed"];
+                // subscriptionStatus.innerHTML = data["subscribed"];
                 if (data["subscribed"] === true) {
                     subscribedIcon.className = "nav-item nav-link fa-solid fa-envelope";
+                    subscribedHomeIcon.className = "nav-item nav-link fa-solid fa-envelope fa-5x";
+                    subscribedHomeText.innerHTML = "You are currently subscribed!<br>To unsubscribe, clicke the icon below..."
                 } else {
                     subscribedIcon.className = "nav-item nav-link fa-regular fa-envelope";
+                    subscribedHomeIcon.className = "nav-item nav-link fa-regular fa-envelope fa-5x";
+                    subscribedHomeText.innerHTML = "You are currently not subscribed!<br>Click the icon below to subscribe..."
                 }
             }
             if (data["status"] === 400) {
-                alert(data["error"]);
+                window.location.replace("/login");
             }
       })
       .catch((e) => alert(e));

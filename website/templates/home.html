@@ -12,7 +12,6 @@
                 </div>
                 <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 mb-5">Explore around, get to know me a bit!</p>
-                    <!--<a class="btn btn-primary btn-xl" href="#about">Find Out More</a>-->
                 </div>
             </div>
         </div>
@@ -30,7 +29,7 @@
         </div>
     </section>
     <!-- Pinned Posts -->
-    <section class="main bg-dark-subtle" id="pinned" style='background-image: url("/static/steamboat.jpg");'>
+    <section class="main" id="pinned" style='background-image: url("/static/steamboat.jpg");'>
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <!-- Heading - Pinned Posts -->
@@ -92,14 +91,48 @@
             </div>
         </div>
     </section>
+    <!-- Subscribe -->
+    <section class="main page-section" id="subscribe" style='background-image: url("/static/SantaYnez.jpg");'>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <h2 class="mt-0">Subscribe!</h2>
+                    <hr class="divider divider-light" />
+                    <div class="card bg-light mx-auto" style="--bs-bg-opacity: .8; padding: 1rem; max-width: 450px;">
+                    {% if user.is_authenticated %}
+                        {% if user.permissions == "Root" %}
+                            <p>You're a Root user, you don't need to subscribe</p>
+                            <i class="fa-solid fa-carrot fa-5x"></i>
+                        {% else %}
+                            {% if user.subscribed == True %}
+                                <div id="subscribed-text-{{ user.id }}">
+                                    You are currently subscribed!<br>To unsubscribe, clicke the icon below...
+                                </div>
+                                <i class="nav-item nav-link fa-solid fa-envelope fa-5x" onclick=toggle_subscription({{ user.id }}) id="subscribed-home-{{ user.id }}"></i>  <!-- <span hidden id="subscription-status-{{ user.id }}">True</span> -->
+                            {% else %}
+                                <div id="subscribed-text-{{ user.id }}">
+                                    You are currently not subscribed!<br>Click the icon below to subscribe...
+                                </div>
+                                <i class="nav-item nav-link fa-regular fa-envelope fa-5x" onclick=toggle_subscription({{ user.id }}) id="subscribed-home-{{ user.id }}"></i>  <!-- <span hidden id="subscription-status-{{ user.id }}">False</span> -->
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <p>You must login to subscribe!</p>
+                        <p>Click the icon below to login or sign up...</p>
+                        <a class="nav-item nav-link fa-regular fa-user fa-5x" href="/login"></a>
+                    {% endif %}
+                </div></div>
+            </div>
+        </div>
+    </section>
     <!-- Contact form -->
-    <section class="page-section" id="contact">
+    <section class="page-section bg-secondary" id="contact">
         <div class="container" >
             <div class="row justify-content-center">
                 <div class="text-center">
-                    <h2 class="mt-0">Let's Get In Touch!</h2>
+                    <h2 class="text-white mt-0">Let's Get In Touch!</h2>
                     <hr class="divider" />
-                    <p class="text-muted mb-5">Have questions or comments? I promise this isn't just shouting into the&nbsp;ether.</p>
+                    <p class="mb-5">Have questions or comments? I promise this isn't just shouting into the&nbsp;ether.</p>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -115,9 +148,13 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                    <button class="btn btn-primary btn-xl btn-secondary" id="submitButton" type="submit" value="Submit" style="max-width: 100px;">Submit</button>
+                    <button class="btn btn-dark btn-xl btn-secondary" id="submitButton" type="submit" value="Submit" style="max-width: 100px;">Submit</button>
             </div>
         </div>
     </section>
+    <!-- Footer -->
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 - Zinniger & Co.</div></div>
+    </footer>
 </body>
 {% endblock %}
