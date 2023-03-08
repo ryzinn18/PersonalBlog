@@ -31,7 +31,15 @@ def create_post():
             return render_template("create_post.html", user=current_user)
 
         # Create the new post if method is POST
-        post = Post(title=title, description=description, text=text, image=image, author=current_user.id)
+        post = Post(
+            title=title,
+            description=description,
+            text=text,
+            image=image,
+            author=current_user.id,
+            date_created=datetime.now(),
+            date_updated=datetime.now(),
+        )
         db.session.add(post)
         db.session.commit()
 
@@ -136,19 +144,22 @@ def post(post_id):
 @views.route("/create-comment/<post_id>", methods=["POST"])
 @login_required
 def create_comment(post_id):
+    """Creates a comment if the request method is POST"""
 
-    text = request.form.get("text")
+    # Get the comment and the post the comment corresponds to
+    comment = request.form.get("text")
     post = Post.query.filter_by(id=post_id).first()
 
-    if not text:
+    # Check for edge cases - empty comment & post doesn't exist
+    if not comment:
         flash("Comment cannot be empty!", category="error")
         return render_template("post.html", user=current_user, post=post)
     if not post:
-        flash("Post does not exist!", category="error")
         return jsonify({"error": "Post does not exist!", "status": 400})
 
+    # If the request method is POST, write the comment to the post and refresh the page
     if request.method == "POST":
-        comment = Comment(text=text, author=current_user.id, post_id=post_id)
+        comment = Comment(text=comment, author=current_user.id, date_created=datetime.now(), post_id=post_id)
         db.session.add(comment)
         db.session.commit()
         return render_template("post.html", user=current_user, post=post)
@@ -192,7 +203,7 @@ def like(post_id):
         db.session.delete(like)
         db.session.commit()
     else:
-        like = Like(author=current_user.id, post_id=post_id)
+        like = Like(author=current_user.id, date_created=datetime.now(), post_id=post_id)
         db.session.add(like)
         db.session.commit()
 
