@@ -1,6 +1,5 @@
 from . import db
 from flask_login import UserMixin
-from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -9,7 +8,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150), unique=True, nullable=False)
     first_name = db.Column(db.String(15), nullable=False)
     last_name = db.Column(db.String(25), nullable=False)
-    password = db.Column(db.String(150))
+    password = db.Column(db.String(150), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), nullable=False)
     permissions = db.Column(db.String(10), default="Viewer")
     subscribed = db.Column(db.Boolean, nullable=False)
