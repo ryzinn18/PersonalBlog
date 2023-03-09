@@ -188,13 +188,14 @@ def create_comment(post_id):
         flash("Comment cannot be empty!", category="error")
         return render_template("post.html", user=current_user, post=post)
     if not post:
-        return jsonify({"error": "Post does not exist!", "status": 400})
+        return render_template("post.html", user=current_user, post=post)
 
     # Write the comment to the post and refresh the page
     comment = Comment(text=comment, author=current_user.id, date_created=datetime.now(), post_id=post_id)
     db.session.add(comment)
     db.session.commit()
-    return render_template("post.html", user=current_user, post=post)
+
+    return redirect(url_for("views.post", post_id=post.id))
 
 
 @views.route("/delete-comment/<comment_id>")
