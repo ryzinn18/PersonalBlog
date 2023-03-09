@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(15), nullable=False)
     last_name = db.Column(db.String(25), nullable=False)
     password = db.Column(db.String(150))
-    date_created = db.Column(db.DateTime(timezone=True), default=datetime.now())
+    date_created = db.Column(db.DateTime(timezone=True), nullable=False)
     permissions = db.Column(db.String(10), default="Viewer")
     subscribed = db.Column(db.Boolean, nullable=False)
     posts = db.relationship("Post", backref="user", passive_deletes=True)
