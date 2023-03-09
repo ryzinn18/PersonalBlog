@@ -128,7 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
 # Manual additions
-bootstrap_theme
-test.py
-test.html
+ryzinn18.pem

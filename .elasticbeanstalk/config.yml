@@ -1,5 +1,17 @@
 branch-defaults:
   main:
-    environment: null
+    environment: blog-env
 global:
+  application_name: PersonalBlog
+  branch: null
+  default_ec2_keyname: ryzinn18
+  default_platform: Python 3.8 running on 64bit Amazon Linux 2
+  default_region: us-west-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
   profile: null
+  repository: null
+  sc: git
+  workspace_type: Application
