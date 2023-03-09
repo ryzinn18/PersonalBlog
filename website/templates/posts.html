@@ -3,13 +3,82 @@
     All Posts
 {% endblock %}
 {% block content %}
-<body class="post" style='background-image: url("/static/swamis.jpg");'>
-        <div class="container-sm" style="padding-bottom: 8rem;">
-            <div class="col-lg-7  mx-auto" style="min-width:700px;">
-                <h1 class="text-black font-weight-bold text-center"><b>All Posts</b></h1>
-                <hr class="divider" />
-                {% include "posts_div.html" %}
+<body class="post" style='background-image: url("/static/image/swamis.jpg");'>
+    <div class="container-sm" style="padding-bottom: 8rem;">
+        <div class="col-lg-7  mx-auto" style="min-width:700px;">
+            <h1 class="text-black font-weight-bold text-center"><b>All Posts</b></h1>
+            <hr class="divider" />
+            <!-- Feed of All Posts -->
+            <div id="posts">
+                {% for post in posts %}
+                    <ul class="container-sm">
+                        <!-- Post Card -->
+                        <li class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;" id="post-card-{{post.id}}">
+                            <!-- Card Header - Author & Buttons-->
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <label><b>Author: </b>{{ post.user.first_name }} {{ post.user.last_name }}</label>
+                                {% include "button_group.html" %}
+                            </div>
+                            <!-- Card Body - Title, Description, & Comments -->
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <h2><a href="/post/{{ post.id }}" style="text-decoration: none; color: #005254;">{{post.title}}</a></h2>
+                                </div>
+                                {% if post.description != "None" %}
+                                    <div class="card-text"><b>{{post.description}}</b></div><br>
+                                {% endif %}
+                            </div>
+                            <!-- Comment Section -->
+                            <div style="padding-left: 1rem; padding-bottom: 1rem;">
+                                <!-- Whole Collapsable Container -->
+                                <div class="collapse" id="comments-{{ post.id }}">
+                                    <!-- Whole Comment Card When Expanded -->
+                                    <div class="card border-dark bg-light p-2" style="--bs-bg-opacity: .50;">
+                                        <div class="card-body" id="comments-expanded-{{ post.id }}">
+                                            {% for comment in post.comments %}
+                                            <!-- Individual Comment -->
+                                            <div class="d-flex justify-content-between align-items-center" id="comment-{{ comment.id }}">
+                                                <!-- Comment Author and Text -->
+                                                <div>
+                                                    {{comment.user.username}}: {{comment.text}}
+                                                </div>
+                                                <!-- Comment Date and Option to Delete -->
+                                                <div>
+                                                    <small class="text-muted"> {{comment.date_created.strftime("%b %d, %Y @ %I:%M %p")}}</small>
+                                                    <!-- Allow author or commentor to delete comments -->
+                                                    {% if user.id == comment.author or user.id == post.author  or user.permissions == "Root"%}
+                                                        <i class="fas fa-trash" id="delete-comment-button-{{ post.id }}" onclick=delete_comment({{ comment.id }})></i>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Button for expanding comment section -->
+                                <div class="card-text"  style="padding-top: 1rem">
+                                {% if post.comments|length == 1 %}
+                                    <a data-bs-toggle="collapse" href="#comments-{{ post.id }}" role="button">
+                                        <button class="btn btn-secondary">View 1 Comment</button>
+                                    </a>
+                                {% elif post.comments|length > 1 %}
+                                    <a data-bs-toggle="collapse" href="#comments-{{ post.id }}" role="button">
+                                        <button class="btn btn-secondary">View {{post.comments|length}} Comments</button>
+                                    </a>
+                                {% else %}
+                                    <small class="text-muted">No Comments</small>
+                                {% endif %}
+                                </div>
+                            </div>
+                            <!-- Card Footer - Date -->
+                            <div class="card-footer" style="padding-left: 1.1rem">
+                                {% include "date_group.html" %}
+                            </div>
+                        </li>
+                    </ul>
+                {% endfor %}
             </div>
         </div>
+    </div>
 </body>
 {% endblock %}

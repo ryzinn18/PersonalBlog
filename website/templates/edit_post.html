@@ -1,37 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Update Post{% endblock %}
+{% block title %}Edit Post{% endblock %}
 {% block content %}
-<body class="post" style='background-image: url("/static/singapore.jpg");'>
+<body class="post" style='background-image: url("/static/image/steamboat.jpg");'>
     <div class="container-sm">
-            <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
-                <form class="form-group container-sm" method="POST" action="/update-post/{{post.id}}" id="update-post-{{post.id}}">
-                    <h1 class="text-black font-weight-bold text-center"><b>Update Post</b></h1>
-                    <hr class="divider" />
-                    {% include "button_group.html" %}
-                    <label for="title"><b>Post Title</b></label>
-                    <input type="text" id="title" name="title" class="form-control" value="{{ post.title }}"/><br>
-                    
-                    <label for="description"><b>Description</b></label>
-                    <textarea name="description" id="description" class="form-control">{{ post.description }}</textarea>
-                    
-                    <label for="text"><b>Post Body</b></label>
-                    <textarea name="text" id="text" style="height: 10rem" class="form-control">{{ post.text }}</textarea>
-                    
-                    <label for="image"><b>Image Name</b> (including extension)</label>
-                    <input type="text" id="image" name="image" class="form-control" rows="10" value="{{ post.image }}"/><br>
-                    {% include "date_group.html" %}
-                    <br>
-                    <div align="center">
-                        <button type="submit" class="btn btn-lg btn-dark">Update Post</button>
-                    </div>
-                    <br>
+        <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
+            <!-- Form for Editing Post's Current Contents -->
+            <form class="form-group container-sm" method="POST" action="/update-post/{{post.id}}" id="update-post-{{post.id}}">
+                <h1 class="text-black font-weight-bold text-center"><b>Update Post</b></h1>
+                <hr class="divider" />
+                {% include "button_group.html" %}<br>
+                <label for="title"><b>Post Title</b></label>
+                <input type="text" id="title" name="title" class="form-control" value="{{ post.title }}"/><br>
+                
+                <label for="description"><b>Description</b></label>
+                <textarea name="description" id="description" class="form-control">{{ post.description }}</textarea><br>
+                
+                <label for="text"><b>Post Body</b></label>
+                <textarea name="text" id="text" style="height: 10rem" class="form-control">{{ post.text }}</textarea><br>
+                
+                <label for="image"><b>Image Name</b> (including extension)</label>
+                <input type="text" id="image" name="image" class="form-control" rows="10" value="{{ post.image }}"/><br>
+                {% include "date_group.html" %}
+                <!-- Submit Form Button -->
+                <div align="center" style="padding: 2rem;">
+                    <button type="submit" class="btn btn-lg btn-dark">Update Post</button>
+                </div>
             </form>
-            </div>
-            <div align="center" style="padding: 4rem">
-                <a href="/home" >
-                    <button type="button" class="btn btn-lg btn-secondary">Return Home</button>
-                </a>
-            </div>
+        </div>
+        <!-- Return Home Button -->
+        <div align="center" style="padding: 4rem">
+            <a href="/home" >
+                <button type="button" class="btn btn-lg btn-secondary">Return Home</button>
+            </a>
+        </div>
     </div>
 </body>
 {% endblock %}

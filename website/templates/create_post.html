@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Create Post{% endblock %}
 {% block content %}
-<body class="post" style='background-image: url("/static/singapore.jpg");'>
+<body class="post" style='background-image: url("/static/image/singapore.jpg");'>
     <div class="container-sm">
         <div class="col-lg-10 card mx-auto border-dark bg-light p-2" style="--bs-bg-opacity: .75;">
+            <!-- Form for Creating a Post -->
             <form class="form-group container-sm" method="POST" action="/create-post">
                 <h1 class="text-black font-weight-bold text-center"><b>Create a Post</b></h1>
                 <hr class="divider" />
@@ -12,25 +13,26 @@
                 <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title"/><br>
                 
                 <label for="description"><b>Description</b></label>
-                <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea>
+                <textarea name="description" id="description" class="form-control" placeholder="Optional Description"></textarea><br>
                 
                 <label for="text"><b>Post Body</b></label>
-                <textarea name="text" id="text" class="form-control" style="height: 10rem" placeholder="Write Post Here"></textarea>
+                <textarea name="text" id="text" class="form-control" style="height: 10rem" placeholder="Write Post Here"></textarea><br>
                 
                 <label for="image"><b>Image Name</b> (including extension)</label>
                 <input type="text" id="image" name="image" class="form-control" rows="10" placeholder="Optional Image Name"/><br>
-                <br>
-                <div align="center">
+                
+                <!-- Post Button -->
+                <div align="center" style="padding: 2rem">
                     <button type="submit" class="btn btn-lg btn-dark">Post</button>
                 </div>
-                <br>
             </form>
         </div>
+        <!-- Return Home Button -->
         <div align="center" style="padding: 4rem">
             <a href="/home" >
                 <button type="button" class="btn btn-lg btn-secondary">Return Home</button>
             </a>
         </div>
     </div> 
-</section>
+</body>
 {% endblock %}

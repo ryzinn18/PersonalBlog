@@ -1,7 +1,6 @@
 header.masthead {
     padding-top: 10rem;
     padding-bottom: calc(10rem - 4.5rem);
-    background: url("/static/profile.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -207,4 +206,9 @@ div.alert {
   left: 50%; 
   top: 10%; 
   transform: translate(-50%, 0);
+}
+
+label.spacing {
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
 }

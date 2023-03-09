@@ -2,32 +2,33 @@
 {% block title %}Sign Up{% endblock %}
 {% block content %}
 <section class="auth">
+    <!-- Signup Form -->
     <form method="POST" id="sign-up">
         <h3 align="center">Sign Up</h3>
         <div class="form-group mx-auto" style="max-width: 450px;">
-            <label for="username">Username</label>
+            <label class="spacing" for="username">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username"/>
-            <label for="email">Email Address</label>
+            <label class="spacing" for="email">Email Address</label>
             <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email"/>
-            <label for="fName">First Name</label>
+            <label class="spacing" for="fName">First Name</label>
             <input type="text" id="fName" name="fName" class="form-control" placeholder="Enter First Name"/>
-            <label for="lName">Last Name</label>
+            <label class="spacing" for="lName">Last Name</label>
             <input type="text" id="lName" name="lName" class="form-control" placeholder="Enter Last Name"/>
-            <label for="password1">Password</label>
+            <label class="spacing" for="password1">Password</label>
             <input type="password" id="password1" name="password1" class="form-control" placeholder="Enter Password"/>
-            <label for="password2">Reenter Password</label>
+            <label class="spacing" for="password2">Reenter Password</label>
             <input type="password" id="password2" name="password2" class="form-control" placeholder="Renter Password"/>
             <input type="checkbox" id="subscribe" name="subscribe" value="subscribe" style="width: 20px; height: 20px; vertical-align: -3px;"/>
-            <label for="subscribe" style="padding-top: 1rem"> I would like to be notified about new posts.</label>
-            <div align="center" style="padding-top: 1rem;">
+            <label class="spacing" for="subscribe" style="padding-top: 1rem"> I would like to be notified about new posts.</label>
+            <!-- Sign Up Button -->
+            <div align="center" style="padding-top: 1rem; padding-bottom: 1rem;">
                 <button class="btn text-bg-dark" type="submit">Sign Up</button>
             </div>
-            <br>
         </div>
     </form>
+    <!-- Option to Switch to Login Page -->
     <div align="center">
-        <label>Already have an account?</label>
-        <br>
+        <label>Already have an account?</label><br>
         <a class="link-dark" href="/login">Login</a>
     </div>
 </section>

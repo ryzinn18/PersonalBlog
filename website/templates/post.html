@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-{% block title %}
-    {{post.title}}
-{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-<body class="post" style='background-image: url("/static/{{ post.image }}")'>
+<body class="post" style='background-image: url("/static/image/{{ post.image }}")'>
     <div class="container-sm" style="padding-bottom: 7rem;">
         <!-- Post Card -->
         <div class="card col-lg-10 mx-auto bg-light p-2" style="--bs-bg-opacity: .75;">
@@ -30,7 +28,7 @@
                     <pre>{{post.text}}</pre>
                 </div>
             </div>  
-            <!-- Footer - Comments -->
+            <!-- Card Footer - Comments -->
             <div class="card-footer">
                 <div class="card-body" id="comments-expanded-{{post.id}}">
                     {% for comment in post.comments %}
@@ -52,6 +50,7 @@
                     </div>
                     {% endfor %}
                 </div>
+                <!-- Form to create new comment -->
                 <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}" id="create-comment-{{post.id}}">
                     <input type="text" id="comment-text" name="text" class="form-control" placeholder="Leave a comment..."/>
                     <button type="submit" class="btn btn-dark">Comment</button>
