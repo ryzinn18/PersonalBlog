@@ -2,5 +2,7 @@ from website import create_app
 
 
 if __name__ == "__main__":
-    application = create_app()
-    application.run(debug=True)
+    app = create_app()
+    app.run(debug=True)
+else:
+    app = create_app()
